@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://sqlite-sync.com/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://sqlite-sync.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://sqlite-sync.com/">
+      <s:element name="ReceiveData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="subscriber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="data" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReceiveDataResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetDataForSync">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="subscriber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="table" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDataForSyncResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDataForSyncResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncCompleted">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="syncId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SyncCompletedResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetFullDBSchema">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="subscriber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFullDBSchemaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFullDBSchemaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ReceiveDataSoapIn">
+    <wsdl:part name="parameters" element="tns:ReceiveData" />
+  </wsdl:message>
+  <wsdl:message name="ReceiveDataSoapOut">
+    <wsdl:part name="parameters" element="tns:ReceiveDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDataForSyncSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDataForSync" />
+  </wsdl:message>
+  <wsdl:message name="GetDataForSyncSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDataForSyncResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncCompletedSoapIn">
+    <wsdl:part name="parameters" element="tns:SyncCompleted" />
+  </wsdl:message>
+  <wsdl:message name="SyncCompletedSoapOut">
+    <wsdl:part name="parameters" element="tns:SyncCompletedResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFullDBSchemaSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFullDBSchema" />
+  </wsdl:message>
+  <wsdl:message name="GetFullDBSchemaSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFullDBSchemaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReceiveDataHttpGetIn">
+    <wsdl:part name="subscriber" type="s:string" />
+    <wsdl:part name="data" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReceiveDataHttpGetOut" />
+  <wsdl:message name="GetDataForSyncHttpGetIn">
+    <wsdl:part name="subscriber" type="s:string" />
+    <wsdl:part name="table" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataForSyncHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SyncCompletedHttpGetIn">
+    <wsdl:part name="syncId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SyncCompletedHttpGetOut" />
+  <wsdl:message name="GetFullDBSchemaHttpGetIn">
+    <wsdl:part name="subscriber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetFullDBSchemaHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ReceiveDataHttpPostIn">
+    <wsdl:part name="subscriber" type="s:string" />
+    <wsdl:part name="data" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReceiveDataHttpPostOut" />
+  <wsdl:message name="GetDataForSyncHttpPostIn">
+    <wsdl:part name="subscriber" type="s:string" />
+    <wsdl:part name="table" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataForSyncHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SyncCompletedHttpPostIn">
+    <wsdl:part name="syncId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SyncCompletedHttpPostOut" />
+  <wsdl:message name="GetFullDBSchemaHttpPostIn">
+    <wsdl:part name="subscriber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetFullDBSchemaHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="SyncSoap">
+    <wsdl:operation name="ReceiveData">
+      <wsdl:input message="tns:ReceiveDataSoapIn" />
+      <wsdl:output message="tns:ReceiveDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataForSync">
+      <wsdl:input message="tns:GetDataForSyncSoapIn" />
+      <wsdl:output message="tns:GetDataForSyncSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncCompleted">
+      <wsdl:input message="tns:SyncCompletedSoapIn" />
+      <wsdl:output message="tns:SyncCompletedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFullDBSchema">
+      <wsdl:input message="tns:GetFullDBSchemaSoapIn" />
+      <wsdl:output message="tns:GetFullDBSchemaSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SyncHttpGet">
+    <wsdl:operation name="ReceiveData">
+      <wsdl:input message="tns:ReceiveDataHttpGetIn" />
+      <wsdl:output message="tns:ReceiveDataHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataForSync">
+      <wsdl:input message="tns:GetDataForSyncHttpGetIn" />
+      <wsdl:output message="tns:GetDataForSyncHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncCompleted">
+      <wsdl:input message="tns:SyncCompletedHttpGetIn" />
+      <wsdl:output message="tns:SyncCompletedHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFullDBSchema">
+      <wsdl:input message="tns:GetFullDBSchemaHttpGetIn" />
+      <wsdl:output message="tns:GetFullDBSchemaHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SyncHttpPost">
+    <wsdl:operation name="ReceiveData">
+      <wsdl:input message="tns:ReceiveDataHttpPostIn" />
+      <wsdl:output message="tns:ReceiveDataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataForSync">
+      <wsdl:input message="tns:GetDataForSyncHttpPostIn" />
+      <wsdl:output message="tns:GetDataForSyncHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncCompleted">
+      <wsdl:input message="tns:SyncCompletedHttpPostIn" />
+      <wsdl:output message="tns:SyncCompletedHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFullDBSchema">
+      <wsdl:input message="tns:GetFullDBSchemaHttpPostIn" />
+      <wsdl:output message="tns:GetFullDBSchemaHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SyncSoap" type="tns:SyncSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ReceiveData">
+      <soap:operation soapAction="http://sqlite-sync.com/ReceiveData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataForSync">
+      <soap:operation soapAction="http://sqlite-sync.com/GetDataForSync" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncCompleted">
+      <soap:operation soapAction="http://sqlite-sync.com/SyncCompleted" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFullDBSchema">
+      <soap:operation soapAction="http://sqlite-sync.com/GetFullDBSchema" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SyncSoap12" type="tns:SyncSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ReceiveData">
+      <soap12:operation soapAction="http://sqlite-sync.com/ReceiveData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataForSync">
+      <soap12:operation soapAction="http://sqlite-sync.com/GetDataForSync" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncCompleted">
+      <soap12:operation soapAction="http://sqlite-sync.com/SyncCompleted" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFullDBSchema">
+      <soap12:operation soapAction="http://sqlite-sync.com/GetFullDBSchema" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SyncHttpGet" type="tns:SyncHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="ReceiveData">
+      <http:operation location="/ReceiveData" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataForSync">
+      <http:operation location="/GetDataForSync" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncCompleted">
+      <http:operation location="/SyncCompleted" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetFullDBSchema">
+      <http:operation location="/GetFullDBSchema" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SyncHttpPost" type="tns:SyncHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="ReceiveData">
+      <http:operation location="/ReceiveData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataForSync">
+      <http:operation location="/GetDataForSync" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncCompleted">
+      <http:operation location="/SyncCompleted" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetFullDBSchema">
+      <http:operation location="/GetFullDBSchema" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Sync">
+    <wsdl:port name="SyncSoap" binding="tns:SyncSoap">
+      <soap:address location="http://demo.sqlite-sync.com/sync.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SyncSoap12" binding="tns:SyncSoap12">
+      <soap12:address location="http://demo.sqlite-sync.com/sync.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SyncHttpGet" binding="tns:SyncHttpGet">
+      <http:address location="http://demo.sqlite-sync.com/sync.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SyncHttpPost" binding="tns:SyncHttpPost">
+      <http:address location="http://demo.sqlite-sync.com/sync.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

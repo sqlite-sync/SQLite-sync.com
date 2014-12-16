@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://demo.sqlite-sync.com/sync.asmx?wsdl" docRef="http://demo.sqlite-sync.com/sync.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://demo.sqlite-sync.com/sync.asmx" xmlns:q1="http://sqlite-sync.com/" binding="q1:SyncSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://demo.sqlite-sync.com/sync.asmx" xmlns:q2="http://sqlite-sync.com/" binding="q2:SyncSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

@@ -1,0 +1,9 @@
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\Libraries\CSharp\SQLiteSyncCOMCsharp\bin\Debug\SQLiteSyncCOMCsharp.dll.config
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\Libraries\CSharp\SQLiteSyncCOMCsharp\bin\Debug\SQLiteSyncCOMCsharp.dll
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\Libraries\CSharp\SQLiteSyncCOMCsharp\bin\Debug\SQLiteSyncCOMCsharp.pdb
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\Libraries\CSharp\SQLiteSyncCOMCsharp\bin\Debug\Newtonsoft.Json.dll
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\Libraries\CSharp\SQLiteSyncCOMCsharp\bin\Debug\System.Data.SQLite.dll
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\Libraries\CSharp\SQLiteSyncCOMCsharp\bin\Debug\Newtonsoft.Json.pdb
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\Libraries\CSharp\SQLiteSyncCOMCsharp\bin\Debug\Newtonsoft.Json.xml
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\Libraries\CSharp\SQLiteSyncCOMCsharp\obj\Debug\SQLiteSyncCOMCsharp.dll
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\Libraries\CSharp\SQLiteSyncCOMCsharp\obj\Debug\SQLiteSyncCOMCsharp.pdb

@@ -1,0 +1,18 @@
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\Libraries\CSharp\SampleApp\bin\Debug\SampleApp.exe.config
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\Libraries\CSharp\SampleApp\bin\Debug\SampleApp.exe
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\Libraries\CSharp\SampleApp\bin\Debug\SampleApp.pdb
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\Libraries\CSharp\SampleApp\bin\Debug\SQLiteSyncCOMCsharp.dll
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\Libraries\CSharp\SampleApp\bin\Debug\System.Data.SQLite.dll
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\Libraries\CSharp\SampleApp\bin\Debug\Newtonsoft.Json.dll
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\Libraries\CSharp\SampleApp\bin\Debug\SQLiteSyncCOMCsharp.pdb
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\Libraries\CSharp\SampleApp\bin\Debug\Newtonsoft.Json.pdb
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\Libraries\CSharp\SampleApp\bin\Debug\Newtonsoft.Json.xml
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\Libraries\CSharp\SampleApp\obj\Debug\SampleApp.csprojResolveAssemblyReference.cache
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\Libraries\CSharp\SampleApp\obj\Debug\SampleApp.Form1.resources
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\Libraries\CSharp\SampleApp\obj\Debug\SampleApp.Properties.Resources.resources
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\Libraries\CSharp\SampleApp\obj\Debug\SampleApp.csproj.GenerateResource.Cache
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\Libraries\CSharp\SampleApp\obj\Debug\SampleApp.exe
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\Libraries\CSharp\SampleApp\obj\Debug\SampleApp.pdb
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\GitHub\SQLite-sync.com\CSharp Library\SampleApp\bin\Debug\SampleApp.exe.config
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\GitHub\SQLite-sync.com\CSharp Library\SampleApp\obj\Debug\SampleApp.exe
+u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\GitHub\SQLite-sync.com\CSharp Library\SampleApp\obj\Debug\SampleApp.pdb
