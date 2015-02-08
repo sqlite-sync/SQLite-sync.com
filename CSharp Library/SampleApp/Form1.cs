@@ -12,7 +12,7 @@ namespace SampleApp
 {
     public partial class Form1 : Form
     {
-        private string connString = "Data Source=u:\\DemoT.db;";        
+        private string connString = "Data Source=c:\\DemoT.db;";
         private string wsUrl = "http://demo.sqlite-sync.com/sync.asmx";
 
         public Form1()

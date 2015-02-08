@@ -39,9 +39,10 @@ namespace SQLiteSyncCOMCsharp
                     try
                     {
                         foreach (KeyValuePair<string, string> entry in dbSchema)
-                        {
-                            sh.Execute(entry.Value);
-                        }
+                            if (!entry.Key.StartsWith("00000"))
+                            {
+                                sh.Execute(entry.Value);
+                            }
                         sh.Commit();
                     }
                     catch (Exception ex)
@@ -143,16 +144,16 @@ namespace SQLiteSyncCOMCsharp
                     #endregion
 
                     sqlitesync_SyncDataToSend.Append("</SyncData>");
-                   
+
                     wsClient.ReceiveData(subscriberId, sqlitesync_SyncDataToSend.ToString());
 
                     #region clear update marker
                     foreach (DataRow table in tables.Rows)
                     {
-                        string tableName = table["tbl_Name"].ToString();
-                        if (tableName.ToLower() != "MergeDelete".ToLower() && tableName.ToLower() != "MergeIdentity".ToLower())
-                        {                            
-                            string updTriggerSQL = (string)sh.ExecuteScalar("select sql from sqlite_master where type='trigger' and name = 'trMergeUpdate_" + tableName + "'");
+                        string tableName = table["tbl_Name"].ToString().ToLower();
+                        if (tableName != "MergeDelete".ToLower() && tableName != "MergeIdentity".ToLower())
+                        {
+                            string updTriggerSQL = (string)sh.ExecuteScalar("select sql from sqlite_master where type='trigger' and name like 'trMergeUpdate_" + tableName + "'");
                             sh.Execute("drop trigger trMergeUpdate_" + tableName + ";");
                             sh.Execute("update " + tableName + " set MergeUpdate=0 where MergeUpdate > 0;");
                             sh.Execute(updTriggerSQL);
@@ -163,7 +164,7 @@ namespace SQLiteSyncCOMCsharp
                     #region clear delete marker
                     sh.Execute("delete from MergeDelete");
                     #endregion
-                     
+
                     conn.Close();
                 }
             }
