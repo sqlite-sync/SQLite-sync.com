@@ -1,0 +1,16 @@
+
+*.exe
+
+*.exe
+
+*.suo
+
+CSharp Library/SampleApp/bin/Debug/SampleApp.vshost.exe
+
+CSharp Library/SampleApp/obj/Debug/DesignTimeResolveAssemblyReferences.cache
+
+CSharp Library/SampleApp/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+
+CSharp Library/SampleApp/obj/Debug/SampleApp.csproj.FileListAbsolute.txt
+
+CSharp Library/SQLiteSyncCOMCsharp/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache

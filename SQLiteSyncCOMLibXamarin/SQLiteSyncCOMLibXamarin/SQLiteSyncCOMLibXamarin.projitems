@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{FF6AFE43-B503-4F26-8B56-DD4961FD7CBD}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>SQLiteSyncCOMLibXamarin</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)SQLiteSyncCOMLibXamarin.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HomePageCS.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Document.cs" />
+  </ItemGroup>
+</Project>
