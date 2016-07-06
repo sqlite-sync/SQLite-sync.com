@@ -28,3 +28,9 @@ u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\GitHub\SQLite-sync.com\CSharp 
 u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\GitHub\SQLite-sync.com\CSharp Library\SampleApp\obj\Debug\SampleApp.Form1.resources
 u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\GitHub\SQLite-sync.com\CSharp Library\SampleApp\obj\Debug\SampleApp.Properties.Resources.resources
 u:\AuroraSoft\Projekty\SQLite-sync.com\Wersja 2.0\GitHub\SQLite-sync.com\CSharp Library\SampleApp\obj\Debug\SampleApp.csproj.GenerateResource.Cache
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 2.0\GitHub\SQLite-sync.com\CSharp Library\SampleApp\bin\Debug\SampleApp.exe.config
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 2.0\GitHub\SQLite-sync.com\CSharp Library\SampleApp\obj\Debug\SampleApp.exe
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 2.0\GitHub\SQLite-sync.com\CSharp Library\SampleApp\obj\Debug\SampleApp.pdb
+Z:\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 2.0\GitHub\SQLite-sync.com\CSharp Library\SampleApp\bin\Debug\SampleApp.exe.config
+Z:\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 2.0\GitHub\SQLite-sync.com\CSharp Library\SampleApp\obj\Debug\SampleApp.exe
+Z:\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 2.0\GitHub\SQLite-sync.com\CSharp Library\SampleApp\obj\Debug\SampleApp.pdb
