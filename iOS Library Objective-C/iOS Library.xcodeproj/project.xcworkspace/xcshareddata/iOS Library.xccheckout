@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B60D8F8A-B80F-4C25-AA08-20649777EF7C</string>
+	<key>IDESourceControlProjectName</key>
+	<string>iOS Library</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>53CECA7BE0D45B6D2A7A30BE19B8E9BCA67C3990</key>
+		<string>https://github.com/sqlite-sync/SQLite-sync.com.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>iOS Library Objective-C/iOS Library.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>53CECA7BE0D45B6D2A7A30BE19B8E9BCA67C3990</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/sqlite-sync/SQLite-sync.com.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>53CECA7BE0D45B6D2A7A30BE19B8E9BCA67C3990</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>53CECA7BE0D45B6D2A7A30BE19B8E9BCA67C3990</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SQLite-sync.com</string>
+		</dict>
+	</array>
+</dict>
+</plist>

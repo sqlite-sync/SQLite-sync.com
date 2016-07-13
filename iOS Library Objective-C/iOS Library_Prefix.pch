@@ -1,0 +1,8 @@
+//
+// Prefix header for all source files of the 'W3WebService' target in the 'W3WebService' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    #import <UIKit/UIKit.h>
+#endif
