@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		0829D0DA1D2A5F0F0027B766 /* SQLiteSyncCOMSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 0829D0D81D2A5F0F0027B766 /* SQLiteSyncCOMSync.m */; };
+		089D6E201D3FB7BE00B96D98 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 089D6E1F1D3FB7BE00B96D98 /* Media.xcassets */; };
+		08FA114B1D422FDE000BC44D /* tableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FA114A1D422FDE000BC44D /* tableView.xib */; };
+		08FA114D1D42300E000BC44D /* tableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FA114C1D42300E000BC44D /* tableView.m */; };
+		08FA11541D424E9F000BC44D /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FA11521D424E9F000BC44D /* MyCell.m */; };
+		08FA11551D424E9F000BC44D /* MyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FA11531D424E9F000BC44D /* MyCell.xib */; };
 		1D3623260D0F684500981E51 /* W3WebServiceAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* W3WebServiceAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -40,6 +45,13 @@
 /* Begin PBXFileReference section */
 		0829D0D81D2A5F0F0027B766 /* SQLiteSyncCOMSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteSyncCOMSync.m; sourceTree = "<group>"; };
 		0829D0D91D2A5F0F0027B766 /* SQLiteSyncCOMSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteSyncCOMSync.h; sourceTree = "<group>"; };
+		089D6E1F1D3FB7BE00B96D98 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		08FA114A1D422FDE000BC44D /* tableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = tableView.xib; sourceTree = "<group>"; };
+		08FA114C1D42300E000BC44D /* tableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tableView.m; sourceTree = "<group>"; };
+		08FA114E1D423018000BC44D /* tableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tableView.h; sourceTree = "<group>"; };
+		08FA11511D424E9F000BC44D /* MyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCell.h; sourceTree = "<group>"; };
+		08FA11521D424E9F000BC44D /* MyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCell.m; sourceTree = "<group>"; };
+		08FA11531D424E9F000BC44D /* MyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCell.xib; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* W3WebServiceAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = W3WebServiceAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* W3WebServiceAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = W3WebServiceAppDelegate.m; sourceTree = "<group>"; };
@@ -114,11 +126,17 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				08FA11511D424E9F000BC44D /* MyCell.h */,
+				08FA11521D424E9F000BC44D /* MyCell.m */,
+				08FA11531D424E9F000BC44D /* MyCell.xib */,
 				1D3623240D0F684500981E51 /* W3WebServiceAppDelegate.h */,
 				1D3623250D0F684500981E51 /* W3WebServiceAppDelegate.m */,
 				3D95D8891358CE13000906CB /* myView.h */,
 				3D95D88A1358CE13000906CB /* myView.m */,
 				3D95D88B1358CE13000906CB /* myView.xib */,
+				08FA114A1D422FDE000BC44D /* tableView.xib */,
+				08FA114C1D42300E000BC44D /* tableView.m */,
+				08FA114E1D423018000BC44D /* tableView.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -138,6 +156,7 @@
 				400F47541A433C0C00173343 /* sqlitesync.db */,
 				400F47501A43391000173343 /* SQLite-sync.com */,
 				080E96DDFE201D6D7F000001 /* Classes */,
+				089D6E1F1D3FB7BE00B96D98 /* Media.xcassets */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -285,6 +304,11 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				TargetAttributes = {
+					1D6058900D05DD3D006BFB54 = {
+						DevelopmentTeam = 8BE789433T;
+					};
+				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "iOS Library" */;
 			compatibilityVersion = "Xcode 3.1";
@@ -311,8 +335,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				400F47571A434A6000173343 /* sqlitesync.db in Resources */,
+				08FA11551D424E9F000BC44D /* MyCell.xib in Resources */,
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
+				089D6E201D3FB7BE00B96D98 /* Media.xcassets in Resources */,
 				3D95D88D1358CE13000906CB /* myView.xib in Resources */,
+				08FA114B1D422FDE000BC44D /* tableView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,11 +363,13 @@
 				402CC44B1A4384970077DFD9 /* JSONModel+networking.m in Sources */,
 				0829D0DA1D2A5F0F0027B766 /* SQLiteSyncCOMSync.m in Sources */,
 				401122691A58181700724DD2 /* XMLReader.m in Sources */,
+				08FA11541D424E9F000BC44D /* MyCell.m in Sources */,
 				400F47531A43394F00173343 /* DBManager.m in Sources */,
 				402CC4491A4384970077DFD9 /* JSONAPI.m in Sources */,
 				402CC44D1A4384970077DFD9 /* JSONValueTransformer.m in Sources */,
 				402CC44A1A4384970077DFD9 /* JSONHTTPClient.m in Sources */,
 				402CC4441A4384970077DFD9 /* JSONModel.m in Sources */,
+				08FA114D1D42300E000BC44D /* tableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,7 +381,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -368,6 +400,7 @@
 				LIBRARY_SEARCH_PATHS = "/Applications/Xcode/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include/libxml2/**";
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "iOS Library";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "/Applications/Xcode/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include/libxml2/libxml/**";
 			};
@@ -378,7 +411,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOS Library_Prefix.pch";
@@ -392,6 +428,7 @@
 				LIBRARY_SEARCH_PATHS = "/Applications/Xcode/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include/libxml2/**";
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "iOS Library";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "/Applications/Xcode/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include/libxml2/libxml/**";
 				VALIDATE_PRODUCT = YES;

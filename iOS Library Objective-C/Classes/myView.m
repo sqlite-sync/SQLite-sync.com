@@ -7,6 +7,7 @@
 //
 
 #import "myView.h"
+#import "tableView.h"
 #import "DBManager.h"
 #import "JSONModel.h"
 #import "JSONHTTPClient.h"
@@ -25,9 +26,10 @@
 
 
 - (void)viewDidLoad {
-    // Initialize the dbManager property.
     [super viewDidLoad];
+    [self setTablesDropDown];
     
+    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)]];
 }
  
 
@@ -41,7 +43,6 @@
 
 -(IBAction)invokeService
 {
-	
 	if ([txt1.text length]==0) {
 		
 		UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"WebService"
@@ -53,7 +54,7 @@
 		[alert release];
 	}
     else {
-        SQLiteSyncCOMCore *sqliteSyncCOMCore = [[SQLiteSyncCOMCore alloc]initWithDatabaseFilename:@"sqlitesync.db" serviceUrl:@"http://test.sqlite-sync.com/sync.asmx"];
+        SQLiteSyncCOMCore *sqliteSyncCOMCore = [[SQLiteSyncCOMCore alloc]initWithDatabaseFilename:@"sqlitesync.db" serviceUrl:@"http://demo.sqlite-sync.com/sync.asmx"];
         [sqliteSyncCOMCore reinitializeDB:[NSString stringWithFormat:@"%@", txt1.text]];
         
 		[txt1 resignFirstResponder];
@@ -64,21 +65,20 @@
                                                        delegate:nil
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
+        
         [alert show];
         [alert release];
 	}
 
 }
 
--(IBAction)backGroundTap:(id)sender
-{
-	[txt1 resignFirstResponder];
+- (void) hideKeyboard {
+    [txt1 resignFirstResponder];
+    [myPickerTextField resignFirstResponder];
 }
 
 -(IBAction)sendAndRecieveChangesTap:(id)sender{
-    NSLog(@"send and recieve changes");
-    
-    SQLiteSyncCOMCore *sqliteSyncCOMCore = [[SQLiteSyncCOMCore alloc]initWithDatabaseFilename:@"sqlitesync.db" serviceUrl:@"http://test.sqlite-sync.com/sync.asmx"];
+    SQLiteSyncCOMCore *sqliteSyncCOMCore = [[SQLiteSyncCOMCore alloc]initWithDatabaseFilename:@"sqlitesync.db" serviceUrl:@"http://demo.sqlite-sync.com/sync.asmx"];
     [sqliteSyncCOMCore sendAndRecieveChanges:[NSString stringWithFormat:@"%@", txt1.text]];
     
     
@@ -108,7 +108,60 @@
 - (void)dealloc {
 	[txt1 release];
 	[output release];
+    [myPickerTextField release];
     [super dealloc];
+}
+
+- (void)setTablesDropDown{
+    pickerArray = [[NSArray alloc] initWithObjects:@"Documents",@"Entities",@"Users",@"UserDocuments",nil];
+    
+    myPickerTextField.textAlignment = UITextAlignmentCenter;
+    myPickerTextField.delegate = self;
+    myPickerView = [[UIPickerView alloc]init];
+    myPickerView.dataSource = self;
+    myPickerView.delegate = self;
+    myPickerView.showsSelectionIndicator = YES;
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]
+                                   initWithTitle:@"Pick" style:UIBarButtonItemStyleDone
+                                   target:self action:@selector(buttonDone:)];
+    UIToolbar *toolBar = [[UIToolbar alloc]initWithFrame:
+                          CGRectMake(0, self.view.frame.size.height-
+                                     myPickerView.frame.size.height-50, 320, 50)];
+    [toolBar setBarStyle:UIBarStyleBlackOpaque];
+    NSArray *toolbarItems = [NSArray arrayWithObjects: doneButton, nil];
+    [toolBar setItems:toolbarItems];
+    myPickerTextField.inputView = myPickerView;
+    myPickerTextField.inputAccessoryView = toolBar;
+}
+
+-(void)buttonDone:(id)sender{
+    [myPickerTextField resignFirstResponder];
+    tableView *view = [tableView initWithTableName:[myPickerTextField text]];
+    [self presentViewController:view animated:YES completion:NULL];
+}
+
+#pragma mark - Text field delegates
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+}
+#pragma mark - Picker View Data source
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 1;
+}
+-(NSInteger)pickerView:(UIPickerView *)pickerView
+numberOfRowsInComponent:(NSInteger)component{
+    return [pickerArray count];
+}
+
+#pragma mark- Picker View Delegate
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:
+(NSInteger)row inComponent:(NSInteger)component{
+    [myPickerTextField setText:[pickerArray objectAtIndex:row]];
+}
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:
+(NSInteger)row forComponent:(NSInteger)component{
+    return [pickerArray objectAtIndex:row];
 }
 
 

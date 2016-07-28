@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 
 
-@interface myView : UIViewController{
-	IBOutlet UITextField *txt1,*output;
+@interface myView : UIViewController
+<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate>{
+    IBOutlet UITextField *txt1,*output;
+    UIPickerView *myPickerView;
+    NSArray *pickerArray;
+    IBOutlet UITextField *myPickerTextField;
 }
 @property (nonatomic,retain) UITextField *txt1,*output;
--(IBAction)backGroundTap:(id)sender;
 -(IBAction)sendAndRecieveChangesTap:(id)sender;
 -(IBAction)invokeService;
 

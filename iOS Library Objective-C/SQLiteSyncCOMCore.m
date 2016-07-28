@@ -23,8 +23,7 @@ SQLiteSyncCOMSync *syncService;
 }
 
 - (void)reinitializeDB:(NSString *)subscriberId{
-    NSDictionary *responseXML = [syncService GetFullDBSchemaSynch:subscriberId];
-    [self reinitializeDBCommit: [responseXML valueForKeyPath:@"soap:Envelope.soap:Body.GetFullDBSchemaResponse.GetFullDBSchemaResult.innerValue"]];
+    [self reinitializeDBCommit: [syncService GetFullDBSchema:subscriberId]];
 }
 
 - (void)sendAndRecieveChanges:(NSString *)subscriberId{
@@ -115,7 +114,7 @@ SQLiteSyncCOMSync *syncService;
     [sqlitesync_SyncDataToSend appendString:@"</delete>"];
     [sqlitesync_SyncDataToSend appendString:@"</SyncData>"];
     
-    [syncService ReceiveDataSynch:subscriberId data:sqlitesync_SyncDataToSend];
+    [syncService ReceiveData:subscriberId data:sqlitesync_SyncDataToSend];
     
     for(NSArray *table in arrTablesToSync){
         NSString *tableName = table[0];
@@ -134,8 +133,7 @@ SQLiteSyncCOMSync *syncService;
     NSArray *arrTablesToSync = [[NSArray alloc] initWithArray:[sqliteDbManager loadDataFromDB:@"select tbl_Name from sqlite_master where type='table'"]];
     for (int i=0; i<arrTablesToSync.count; i++) {
         NSString *tableName = arrTablesToSync[i][0];
-        NSDictionary *responseXML = [syncService GetDataForSyncSynch:subscriberId tableName:tableName];
-        [self commitChangesForTable: [responseXML valueForKeyPath:@"soap:Envelope.soap:Body.GetDataForSyncResponse.GetDataForSyncResult.innerValue"]];
+        [self commitChangesForTable: [syncService GetDataForSync:subscriberId tableName:tableName]];
     }
 }
 - (void) reinitializeDBCommit:(NSString *)reinitializeScript{
@@ -210,7 +208,7 @@ SQLiteSyncCOMSync *syncService;
                     columns = [NSArray new];
                     if([columnsDct isKindOfClass:[NSArray class]]){
                         columns = (NSArray*)columnsDct;
-                    }else if([columnsDct isKindOfClass:[NSDictionary class]]){
+                    }else {
                         columns = [NSArray arrayWithObject:columnsDct];
                     }
                     
