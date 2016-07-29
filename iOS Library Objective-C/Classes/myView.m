@@ -8,9 +8,6 @@
 
 #import "myView.h"
 #import "tableView.h"
-#import "DBManager.h"
-#import "JSONModel.h"
-#import "JSONHTTPClient.h"
 #import "SQLiteSyncCOMCore.h"
 
 @interface myView ()
@@ -59,15 +56,7 @@
         
 		[txt1 resignFirstResponder];
         
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SQLite-sync.com sample"
-                                                        message:@"Database reinitialization done!"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        
-        [alert show];
-        [alert release];
+        [self showMessage:@"Reinitialize database done"];        
 	}
 
 }
@@ -81,14 +70,7 @@
     SQLiteSyncCOMCore *sqliteSyncCOMCore = [[SQLiteSyncCOMCore alloc]initWithDatabaseFilename:@"sqlitesync.db" serviceUrl:@"http://demo.sqlite-sync.com/sync.asmx"];
     [sqliteSyncCOMCore sendAndRecieveChanges:[NSString stringWithFormat:@"%@", txt1.text]];
     
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SQLite-sync.com sample"
-                                                    message:@"Send and recieve changes done!"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-    [alert release];
+    [self showMessage:@"Send and receive changes done"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -110,6 +92,16 @@
 	[output release];
     [myPickerTextField release];
     [super dealloc];
+}
+
+- (void)showMessage:(NSString*)message{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SQLite-sync DEMO"
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+    [alert release];
 }
 
 - (void)setTablesDropDown{
