@@ -1,8 +1,9 @@
 ﻿<Properties StartupItem="Droid/SQLiteSyncCOMLibXamarin.Droid.csproj">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Droid/SQLiteSyncCOMClient.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="iOS/SQLiteSyncCOMClient.cs">
     <Files>
-      <File FileName="Droid/SQLiteSyncCOMClient.cs" Line="22" Column="25" />
+      <File FileName="Droid/SQLiteSyncCOMClient.cs" Line="163" Column="1" />
       <File FileName="SQLiteSyncCOMLibXamarin/HomePageCS.cs" Line="25" Column="45" />
+      <File FileName="iOS/SQLiteSyncCOMClient.cs" Line="162" Column="84" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />

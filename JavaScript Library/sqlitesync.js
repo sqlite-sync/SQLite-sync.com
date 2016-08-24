@@ -241,7 +241,7 @@ function sqlitesync_SyncSendTable(tableIndex) {
         tx.executeSql(selectAllStatement, [], function (tx, result) {
             var datasetTables = result.rows;
             var item = datasetTables.item(tableIndex);
-            if (item['tbl_name'] != "MergeDelete" && item['tbl_name'] != "MergeIdentity") {
+            if (item['tbl_name'] != "MergeDelete") {
 
                 sqlitesync_SyncDataToSend += "<tab n=\"" + item['tbl_name'] + "\">";
 
@@ -330,6 +330,10 @@ function sqlitesync_SyncClearUpdateMarker() {
             var datasetTables = result.rows;
             for(var tableIndex=0; tableIndex<datasetTables.length; tableIndex++){
 	            var item = datasetTables.item(tableIndex);
+				if (item['tbl_name'] == "MergeIdentity") {
+					tx.executeSql("update MergeIdentity set MergeUpdate=0 where MergeUpdate > 0;", [],function (transaction, result) {},function (transaction, error) {});
+				}
+				
 	            if (item['tbl_name'] != "MergeDelete" && item['tbl_name'] != "MergeIdentity") {	
 	                /*** zakutalizowane rekordy***/
 	            	

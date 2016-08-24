@@ -45,8 +45,7 @@ SQLiteSyncCOMSync *syncService;
     for(NSArray *table in arrTablesToSync){
         NSString *tableName = table[0];
         
-        if([tableName caseInsensitiveCompare:@"MergeDelete"] != NSOrderedSame
-           && [tableName caseInsensitiveCompare:@"MergeIdentity"] != NSOrderedSame) {
+        if([tableName caseInsensitiveCompare:@"MergeDelete"] != NSOrderedSame) {
             [sqlitesync_SyncDataToSend appendFormat:@"<tab n=\"%@\">",tableName];
             
             [sqlitesync_SyncDataToSend appendString:@"<ins>"];
@@ -118,6 +117,11 @@ SQLiteSyncCOMSync *syncService;
     
     for(NSArray *table in arrTablesToSync){
         NSString *tableName = table[0];
+        
+        if([tableName caseInsensitiveCompare:@"MergeIdentity"] == NSOrderedSame) {
+            [sqliteDbManager executeNonQuery:[NSString stringWithFormat:@"update MergeIdentity set MergeUpdate=0 where MergeUpdate > 0;"]];
+        }
+        
         if([tableName caseInsensitiveCompare:@"MergeDelete"] != NSOrderedSame
            && [tableName caseInsensitiveCompare:@"MergeIdentity"] != NSOrderedSame) {
             NSString *updTriggerSQL = [sqliteDbManager loadDataFromDB:[NSString stringWithFormat:@"select sql from sqlite_master where type='trigger' and name like 'trMergeUpdate_%@'", tableName]][0][0];

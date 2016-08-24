@@ -12,5 +12,5 @@ AndroidSdkPath=
 AndroidNdkPath=
 JavaSdkPath=
 AndroidSequencePointsMode=None
-XamarinAndroidVersion=6.1.1-1
+XamarinAndroidVersion=6.1.2-21
 AndroidManagedSymbols=False

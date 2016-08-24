@@ -73,7 +73,7 @@ public class SQLiteSyncCOMCore {
         for(SQLiteSyncCOMDBHelper.ResultRow table : tablesToSync.Rows){
             String tableName = table.getCellStringValue("tbl_Name");
 
-            if(!tableName.equalsIgnoreCase("MergeDelete") && !tableName.equalsIgnoreCase("MergeIdentity")){
+            if(!tableName.equalsIgnoreCase("MergeDelete")){
                 sqlitesync_SyncDataToSend.append(String.format("<tab n=\"%1$s\">",tableName));
 
                 sqlitesync_SyncDataToSend.append("<ins>");
@@ -131,6 +131,11 @@ public class SQLiteSyncCOMCore {
                 SQLiteSyncCOMDBHelper.ResultSet tablesToSync = _dbHelper.getQueryResultSet("select tbl_Name from sqlite_master where type='table' and sql like '%RowId%';");
                 for(SQLiteSyncCOMDBHelper.ResultRow table : tablesToSync.Rows) {
                     String tableName = table.getCellStringValue("tbl_Name");
+
+                    if(tableName.equalsIgnoreCase("MergeIdentity")) {
+                        _dbHelper.execSQL(String.format("update MergeIdentity set MergeUpdate=0 where MergeUpdate > 0;"));
+                    }
+
                     if(!tableName.equalsIgnoreCase("MergeDelete") && !tableName.equalsIgnoreCase("MergeIdentity")) {
                         SQLiteSyncCOMDBHelper.ResultSet recordsToSync = _dbHelper.getQueryResultSet(String.format("select sql from sqlite_master where type='trigger' and name like 'trMergeUpdate_%1$s'",tableName));
                         String updTriggerSQL = recordsToSync.Rows.get(0).getCellStringValue("sql");

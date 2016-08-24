@@ -76,7 +76,7 @@ namespace SQLiteSyncCOMLibXamarin
                     foreach (DataRow table in tables.Rows)
                     {
                         string tableName = table["tbl_Name"].ToString();
-                        if (tableName.ToLower() != "MergeDelete".ToLower() && tableName.ToLower() != "MergeIdentity".ToLower())
+                        if (tableName.ToLower() != "MergeDelete".ToLower())
                         {
                             try
                             {
@@ -159,6 +159,9 @@ namespace SQLiteSyncCOMLibXamarin
                             sh.Execute("update " + tableName + " set MergeUpdate=0 where MergeUpdate > 0;");
                             sh.Execute(updTriggerSQL);
                         }
+
+						if (tableName == "MergeIdentity".ToLower())
+							sh.Execute("update MergeIdentity set MergeUpdate=0 where MergeUpdate > 0;");
                     }
                     #endregion
 
