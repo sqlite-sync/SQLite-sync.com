@@ -22,9 +22,11 @@ The service supports many different platforms, such as:
 - Android
 - iOS
 - Xamarin
-- C#
+- .NET (C#)
 - Javascript
 - JQuery
+- Sencha Touch
+- Universal Windows Platform
 
 Our priority is our customer therefore do not hesitate to get in touch with us under support@aqlite-sync.com. We read every email and every incoming message is given the highest priority. 
 
