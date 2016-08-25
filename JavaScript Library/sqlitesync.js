@@ -330,7 +330,7 @@ function sqlitesync_SyncClearUpdateMarker() {
             var datasetTables = result.rows;
             for(var tableIndex=0; tableIndex<datasetTables.length; tableIndex++){
 	            var item = datasetTables.item(tableIndex);
-				if (item['tbl_name'].toSting().toLowerCase() == "mergeidentity") {
+				if (item['tbl_name'].toString().toLowerCase() == "mergeidentity") {
 					tx.executeSql("update MergeIdentity set MergeUpdate=0 where MergeUpdate > 0;", [],function (transaction, result) {},function (transaction, error) {});
 				}
 				
