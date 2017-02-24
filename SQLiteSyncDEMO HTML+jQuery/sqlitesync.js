@@ -339,10 +339,12 @@ function sqlitesync_SyncClearUpdateMarker() {
 	                /*** zakutalizowane rekordy***/
 	            	
 	                var selectForUpdateTable = "select *, ? as syncTableName from " + item['tbl_name'] + " where MergeUpdate > 0";
+					
 	                tx.executeSql(selectForUpdateTable, [item['tbl_name']], function (tx, result) {
 	                	if(result.rows.length > 0){
 	                		var syncTableName = result.rows.item(0)['syncTableName'];
 	                		var selectTriggerStatement = "select * from sqlite_master where type='trigger' and name = 'trMergeUpdate_"+syncTableName+"'";	    	                
+							
 	    	                tx.executeSql(selectTriggerStatement, [], function (tx, result) {
 	    	                	if(result.rows.length > 0){
 	    	                		var syncTableName = result.rows.item(0)['tbl_name'];
@@ -358,7 +360,7 @@ function sqlitesync_SyncClearUpdateMarker() {
                                         
                                     },
                                     function (transaction, error) {
-                                        //console.log("Błąd podczas sqlitesync_SyncClearUpdateMarker update marker:" + error.message + "; Kod: " + error.code + "</br>");
+                                        console.log("Błąd podczas sqlitesync_SyncClearUpdateMarker update marker:" + error.message + "; Kod: " + error.code + "</br>");
                                     });
 	    	                		tx.executeSql(trigger, [],function (transaction, result) {
                                         

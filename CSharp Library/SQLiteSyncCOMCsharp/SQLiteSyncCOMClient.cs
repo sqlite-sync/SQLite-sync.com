@@ -112,7 +112,10 @@ namespace SQLiteSyncCOMCsharp
                                         if (column.ColumnName != "MergeUpdate")
                                         {
                                             sqlitesync_SyncDataToSend.Append("<" + column.ColumnName + ">");
-                                            sqlitesync_SyncDataToSend.Append("<![CDATA[" + record[column.ColumnName].ToString() + "]]>");
+                                            if (record[column.ColumnName].GetType().Name == "Byte[]")
+                                                sqlitesync_SyncDataToSend.Append("<![CDATA[" + Convert.ToBase64String((byte[])record[column.ColumnName]) + "]]>");
+                                            else
+                                                sqlitesync_SyncDataToSend.Append("<![CDATA[" + record[column.ColumnName].ToString() + "]]>");
                                             sqlitesync_SyncDataToSend.Append("</" + column.ColumnName + ">");
                                         }
                                     }

@@ -28,3 +28,4 @@
 /Users/Tomek/Work/Amplifier/Projekty/SQLite-sync.com/Wersja 2.0/GitHub/SQLite-sync.com/SQLiteSyncCOMLibXamarin/Droid/bin/Debug/Newtonsoft.Json.dll
 /Users/Tomek/Work/Amplifier/Projekty/SQLite-sync.com/Wersja 2.0/GitHub/SQLite-sync.com/SQLiteSyncCOMLibXamarin/Droid/bin/Debug/System.Data.Portable.dll
 /Users/Tomek/Work/Amplifier/Projekty/SQLite-sync.com/Wersja 2.0/GitHub/SQLite-sync.com/SQLiteSyncCOMLibXamarin/Droid/bin/Debug/System.Transactions.Portable.dll
+/Users/Tomek/Work/Amplifier/Projekty/SQLite-sync.com/Wersja 2.0/GitHub/SQLite-sync.com/SQLiteSyncCOMLibXamarin/Droid/obj/Debug/MonoAndroid,Version=v6.0.AssemblyAttribute.cs
