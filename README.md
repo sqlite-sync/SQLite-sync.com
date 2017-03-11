@@ -1,4 +1,4 @@
-SQLite-sync.com
+SQLite-sync.com version 3
 ===============
 
 Mobile users now expect desktop quality data driven interactive applications.
