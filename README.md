@@ -1,6 +1,8 @@
 SQLite-sync.com version 3
 ===============
 
+For samples for older version 2.x see branch 'clients-for-v2.x'
+
 Mobile users now expect desktop quality data driven interactive applications.
  
 Yet as a mobile users, ‘Offline’ or ‘Intermittent connectivity’ is a fact of life.
