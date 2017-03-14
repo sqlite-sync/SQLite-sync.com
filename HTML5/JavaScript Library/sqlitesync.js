@@ -1,5 +1,4 @@
 var sqlitesync_SyncServerURL = '';
-//var sqlitesync_SyncList;
 var sqlitesync_SyncTableList = [];
 var sqlitesync_SyncTableCurrentIndex = 0;
 var sqlitesync_SyncGlobalTableIndex = 0;
@@ -8,13 +7,60 @@ var sqlitesync_DB;
 
 var sqlitesync_syncPdaIdent = null;
 
+/**
+ * Synchronize (send/recieve) changes with server, we start here with synchronization process
+ */
+
+function sqlitesync_SyncSendAndReceive(syncServer, syncPdaIdent) {
+    sqlitesync_SyncServerURL = syncServer;
+    sqlitesync_syncPdaIdent = syncPdaIdent;
+
+    sqlitesync_SyncTableList = [];
+    sqlitesync_SyncTableCurrentIndex = 0;
+
+    sqlitesync_AddLog('Starting synchronization. Trying connect to the server...');
+    sqlitesync_DB.transaction(function (transaction,results) {
+
+        var syncMethod = sqlitesync_SyncServerURL + "Sync/" + syncPdaIdent + "/";
+
+        transaction.executeSql("select tbl_Name, ? as syncMethod, ? as sqlitesync_syncPdaIdent from sqlite_master where type='table'", [syncMethod, sqlitesync_syncPdaIdent],
+            function(transaction, result){
+
+                for (var tableIndex = 0; tableIndex < result.rows.length; tableIndex++) {
+					if(result.rows.item(tableIndex)['tbl_name'] != "__WebKitDatabaseInfoTable__" && result.rows.item(tableIndex)['tbl_name'] != "MergeDelete")
+					{
+						sqlitesync_SyncTableList.push({
+							table: result.rows.item(tableIndex)['tbl_name'],
+							syncMethod: result.rows.item(tableIndex)['syncMethod']+ result.rows.item(tableIndex)['tbl_name'],
+							sqlitesync_syncPdaIdent: result.rows.item(tableIndex)['sqlitesync_syncPdaIdent']
+						});
+					}
+                }
+            },function(error){//error
+                sqlitesync_AddLog('<p>Error while syncing with the server ' + error + '</p>');
+            }, function(){
+            });
+
+    },function(error){//error
+        sqlitesync_AddLog('<p>Error while syncing with the server ' + error + '</p>');
+    }, function(){
+		sqlitesync_SyncSendData();
+    });
+
+}
+
+/**
+ * Add table to synchronization
+ * @param url server url
+ * @param tableName table name
+ */
 function sqlitesync_AddTableToSync(url, tableName){
 	$.ajax({
 	    url: url + "AddTable/" + tableName,
 	    method: 'GET',
 	    scope:this,
 	    cache : false,
-	    timeout: 5 * 60 * 1000,//10min
+	    timeout: 5 * 60 * 1000,
 	    success: function(){
 
 	    },
@@ -67,7 +113,7 @@ function sqlitesync_SyncTables(){
 						queryUpdate = responseReturn[0].QueryUpdate;
 						queryDelete = responseReturn[0].QueryDelete;
 
-						/*****usuwanie tymczasowe triggerów********************/
+						/*************************/
 						tx.executeSql(responseReturn[0].TriggerInsertDrop, null, null,
 							function (transaction, error) {
 							});
@@ -77,7 +123,7 @@ function sqlitesync_SyncTables(){
 						tx.executeSql(responseReturn[0].TriggerDeleteDrop, null, null,
 							function (transaction, error) {
 							});
-						/********koniec usuwania triggerów ********************/
+						/****************************/
 
 						for (var i = 0; i < xmlDoc.childNodes[0].childElementCount; i++) {
 
@@ -125,7 +171,7 @@ function sqlitesync_SyncTables(){
 							}
 						}
 
-						/*****tworzenie triggerów********************/
+						/*************************/
 						tx.executeSql(responseReturn[0].TriggerInsert, null, null,
 							function (transaction, error) {
 							});
@@ -135,7 +181,7 @@ function sqlitesync_SyncTables(){
 						tx.executeSql(responseReturn[0].TriggerDelete, null, null,
 							function (transaction, error) {
 							});
-						/********koniec usuwania triggerów ********************/
+						/****************************/
 
 					}
 
@@ -199,45 +245,6 @@ function sqlitesync_SyncTables(){
             sqlitesync_AddLog('<p>Error while syncing with the server ' + responseText + '</p>');
         }
     });
-}
-
-function sqlitesync_SyncSendAndReceive(syncServer, syncPdaIdent) {
-    sqlitesync_SyncServerURL = syncServer;
-    sqlitesync_syncPdaIdent = syncPdaIdent;
-
-    sqlitesync_SyncTableList = [];
-    sqlitesync_SyncTableCurrentIndex = 0;
-
-    sqlitesync_AddLog('Starting synchronization. Trying connect to the server...');
-    sqlitesync_DB.transaction(function (transaction,results) {
-
-        var syncMethod = sqlitesync_SyncServerURL + "Sync/" + syncPdaIdent + "/";
-
-        transaction.executeSql("select tbl_Name, ? as syncMethod, ? as sqlitesync_syncPdaIdent from sqlite_master where type='table'", [syncMethod, sqlitesync_syncPdaIdent],
-            function(transaction, result){
-
-                for (var tableIndex = 0; tableIndex < result.rows.length; tableIndex++) {
-					if(result.rows.item(tableIndex)['tbl_name'] != "__WebKitDatabaseInfoTable__" && result.rows.item(tableIndex)['tbl_name'] != "MergeDelete")
-					{
-						sqlitesync_SyncTableList.push({
-							table: result.rows.item(tableIndex)['tbl_name'],
-							syncMethod: result.rows.item(tableIndex)['syncMethod']+ result.rows.item(tableIndex)['tbl_name'],
-							sqlitesync_syncPdaIdent: result.rows.item(tableIndex)['sqlitesync_syncPdaIdent']
-						});
-					}
-                }
-
-            },function(error){//error
-                sqlitesync_AddLog('<p>Error while syncing with the server ' + error + '</p>');
-            }, function(){
-            });
-
-    },function(error){//error
-        sqlitesync_AddLog('<p>Error while syncing with the server ' + error + '</p>');
-    }, function(){
-		    sqlitesync_SyncSendData();
-    });
-
 }
 
 function sqlitesync_SyncSendData() {
@@ -333,6 +340,9 @@ function sqlitesync_SyncSendTable(tableIndex) {
     });
 }
 
+/*
+ * After synchronization, we need to clear marker for updated records to make sure that we will not send it again
+ */
 function sqlitesync_SyncClearUpdateMarker() {
     var selectAllStatement = "select * from sqlite_master where type='table' and sql like '%RowId%'";
     sqlitesync_DB.transaction(function (tx) {
@@ -346,8 +356,6 @@ function sqlitesync_SyncClearUpdateMarker() {
 				}
 
 	            if (item['tbl_name'] != "MergeDelete" && item['tbl_name'] != "MergeIdentity") {
-	                /*** zakutalizowane rekordy***/
-
 	                var selectForUpdateTable = "select *, ? as syncTableName from " + item['tbl_name'] + " where MergeUpdate > 0";
 	                tx.executeSql(selectForUpdateTable, [item['tbl_name']], function (tx, result) {
 	                	if(result.rows.length > 0){
@@ -362,19 +370,16 @@ function sqlitesync_SyncClearUpdateMarker() {
 
                                     },
                                     function (transaction, error) {
-                                        console.log("Błąd podczas sqlitesync_SyncClearUpdateMarker drop trigger:" + error.message + "; Kod: " + error.code + "</br>");
                                     });
 	    	                		tx.executeSql("update " + syncTableName + " set MergeUpdate=0 where MergeUpdate > 0;", [],function (transaction, result) {
 
                                     },
                                     function (transaction, error) {
-                                        console.log("Błąd podczas sqlitesync_SyncClearUpdateMarker update marker:" + error.message + "; Kod: " + error.code + "</br>");
                                     });
 	    	                		tx.executeSql(trigger, [],function (transaction, result) {
 
                                     },
                                     function (transaction, error) {
-                                        console.log("Błąd podczas sqlitesync_SyncClearUpdateMarker create trigger:" + error.message + "; Kod: " + error.code + "</br>");
                                     });
 	    	                	}
 	    	                });
@@ -387,6 +392,9 @@ function sqlitesync_SyncClearUpdateMarker() {
     });
 }
 
+/*
+ * After synchronization, we need to clear marker for deleted records to make sure that we will not send it again
+ */
 function sqlitesync_SyncClearDeletedRecords() {
     var selectAllStatement = "delete from MergeDelete";
     sqlitesync_DB.transaction(function (tx) {
@@ -395,10 +403,10 @@ function sqlitesync_SyncClearDeletedRecords() {
     });
 }
 
+/*
+ * Preparing and sending records deleted on device
+ */
 function sqlitesync_SyncSendTableDelete(tx) {
-
-    /*** rekordy do skasowania ***/
-
     var selectForDelete = "select * from MergeDelete";
     tx.executeSql(selectForDelete, [], function (tx, result) {
         datasetTable = result.rows;
@@ -419,6 +427,9 @@ function sqlitesync_SyncSendTableDelete(tx) {
     });
 }
 
+/*
+ * Send packge with changes to server
+ */
 function sqlitesync_SyncSendToServer() {
     sqlitesync_SyncDataToSend += "</SyncData>";
 
@@ -434,11 +445,12 @@ function sqlitesync_SyncSendToServer() {
         dataType: 'json',
         timeout: 5 * 60 * 1000,//10min
         success: function (response, status) { //Success Callback
-console.log("tutaj");
+
         	sqlitesync_SyncClearUpdateMarker();
         	sqlitesync_SyncClearDeletedRecords();
 
             sqlitesync_AddLog('Sending finished');
+            //after success we are getting changes from server
             sqlitesync_SyncTables();
         },
         failure: function (result, request) {
@@ -452,6 +464,10 @@ console.log("tutaj");
 function sqlitesync_SyncGetDBSchemaChanges() {
 	sqlitesync_SyncSendData();
 }
+
+/*
+ * Reinitialize subscriber
+ */
 
 function sqlitesync_ReinitializeDB(syncServer, syncPdaIdent) {
     sqlitesync_SyncServerURL = syncServer;
