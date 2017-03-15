@@ -1,0 +1,46 @@
+C:\SQLite-sync.com\DotNetC#\SampleApp\SampleApp\bin\Debug\SampleApp.exe.config
+C:\SQLite-sync.com\DotNetC#\SampleApp\SampleApp\obj\Debug\SampleApp.csprojResolveAssemblyReference.cache
+C:\SQLite-sync.com\DotNetC#\SampleApp\SampleApp\obj\Debug\SampleApp.Properties.Resources.resources
+C:\SQLite-sync.com\DotNetC#\SampleApp\SampleApp\obj\Debug\SampleApp.csproj.GenerateResource.Cache
+C:\SQLite-sync.com\DotNetC#\SampleApp\SampleApp\bin\Debug\SampleApp.exe
+C:\SQLite-sync.com\DotNetC#\SampleApp\SampleApp\bin\Debug\SampleApp.pdb
+C:\SQLite-sync.com\DotNetC#\SampleApp\SampleApp\bin\Debug\SQLiteSyncCOMDotNetClient.dll
+C:\SQLite-sync.com\DotNetC#\SampleApp\SampleApp\bin\Debug\System.Data.SQLite.dll
+C:\SQLite-sync.com\DotNetC#\SampleApp\SampleApp\bin\Debug\RestSharp.dll
+C:\SQLite-sync.com\DotNetC#\SampleApp\SampleApp\bin\Debug\Newtonsoft.Json.dll
+C:\SQLite-sync.com\DotNetC#\SampleApp\SampleApp\bin\Debug\SQLiteSyncCOMDotNetClient.pdb
+C:\SQLite-sync.com\DotNetC#\SampleApp\SampleApp\bin\Debug\Newtonsoft.Json.xml
+C:\SQLite-sync.com\DotNetC#\SampleApp\SampleApp\obj\Debug\SampleApp.exe
+C:\SQLite-sync.com\DotNetC#\SampleApp\SampleApp\obj\Debug\SampleApp.pdb
+C:\SQLite-sync.com\DotNetC#\SampleApp\SampleApp\bin\Debug\EntityFramework.dll
+C:\SQLite-sync.com\DotNetC#\SampleApp\SampleApp\bin\Debug\EntityFramework.SqlServer.dll
+C:\SQLite-sync.com\DotNetC#\SampleApp\SampleApp\bin\Debug\System.Data.SQLite.EF6.dll
+C:\SQLite-sync.com\DotNetC#\SampleApp\SampleApp\bin\Debug\System.Data.SQLite.Linq.dll
+C:\SQLite-sync.com\DotNetC#\SampleApp\SampleApp\bin\Debug\EntityFramework.xml
+C:\SQLite-sync.com\DotNetC#\SampleApp\SampleApp\bin\Debug\EntityFramework.SqlServer.xml
+C:\SQLite-sync.com\DotNetC#\SampleApp\SampleApp\bin\Debug\System.Data.SQLite.xml
+C:\SQLite-sync.com\DotNetC#\SampleApp\SampleApp\bin\Debug\RestSharp.xml
+C:\SQLite-sync.com\DotNetC#\SampleApp\SampleApp\obj\Debug\SampleApp.Form1.resources
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\bin\Debug\SampleApp.exe.config
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\obj\Debug\SampleApp.exe
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\obj\Debug\SampleApp.pdb
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\bin\Debug\SampleApp.exe
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\bin\Debug\SampleApp.pdb
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\bin\Debug\EntityFramework.dll
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\bin\Debug\EntityFramework.SqlServer.dll
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\bin\Debug\Newtonsoft.Json.dll
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\bin\Debug\RestSharp.dll
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\bin\Debug\SQLiteSyncCOMDotNetClient.dll
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\bin\Debug\System.Data.SQLite.dll
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\bin\Debug\System.Data.SQLite.EF6.dll
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\bin\Debug\System.Data.SQLite.Linq.dll
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\bin\Debug\SQLiteSyncCOMDotNetClient.pdb
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\bin\Debug\EntityFramework.xml
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\bin\Debug\EntityFramework.SqlServer.xml
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\bin\Debug\Newtonsoft.Json.xml
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\bin\Debug\RestSharp.xml
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\bin\Debug\System.Data.SQLite.xml
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\obj\Debug\SampleApp.csprojResolveAssemblyReference.cache
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\obj\Debug\SampleApp.Form1.resources
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\obj\Debug\SampleApp.Properties.Resources.resources
+\\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\obj\Debug\SampleApp.csproj.GenerateResource.Cache
