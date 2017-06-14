@@ -30,7 +30,7 @@ The service supports many different platforms, such as:
 - Sencha Touch
 - Universal Windows Platform
 
-Our priority is our customer therefore do not hesitate to get in touch with us under support@aqlite-sync.com. We read every email and every incoming message is given the highest priority. 
+Our priority is our customer therefore do not hesitate to get in touch with us under support@sqlite-sync.com. We read every email and every incoming message is given the highest priority. 
 
 In a nutshell:
 
