@@ -1,14 +1,24 @@
 <ion-header>
-  <ion-navbar>
     <ion-title>
-      Ionic Blank
+     <img class="logo" alt="SQLiteSync logo" height="60" src="assets/sqlite_sync_logo.png">
     </ion-title>
-  </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content padding class="bg-style">
+  <ion-list>
+  <ion-item class="item">
+    <ion-label color="primary">Sync URL</ion-label>
+    <ion-input placeholder="Enter URL to synchronize" value="http://demo.sqlite-sync.com:8081/SqliteSync/API3"></ion-input>
+  </ion-item>
+  <br>
+    <button ion-button block class="button">
+      Reinitialize database
+    </button>
+    <button ion-button block class="button">
+      Synchronize database
+    </button>
+    <button ion-button block class="button" (click)="presentActionSheet()">
+      SELECT * FROM
+    </button>
+  </ion-list>
 </ion-content>
