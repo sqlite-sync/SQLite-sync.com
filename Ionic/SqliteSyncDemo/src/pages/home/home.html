@@ -6,25 +6,23 @@
 
 <ion-content padding class="bg-style">
   <ion-list>
-  <ion-item class="item">
+  <ion-item>
     <ion-label color="primary">Sync URL</ion-label>
     <ion-input placeholder="Enter URL to synchronize" value="http://demo.sqlite-sync.com:8081/SqliteSync/API3"></ion-input>
   </ion-item>
   <br>
   <br>
-    <button ion-button block class="button">
+    <button ion-button round block class="button">
       Reinitialize database
     </button>
     <br>
-    <button ion-button block class="button">
+    <button ion-button round block class="button">
       Synchronize database
     </button>
     <br>
-    <button ion-button block class="button" (click)="presentActionSheet()">
+    <button ion-button round block class="button" (click)="presentActionSheet()">
       SELECT * FROM
     </button>
   </ion-list>
-<p style="margin-bottom: 10px; color:white; position: fixed; bottom: 0; width:100%; text-align: center; font-size: 12px">&copy; 2017 <a href="www.sqlite-sync.com" style="color:white">SQLite-sync.com</a> <br> All rights reserved</p>
+<p class="footer">&copy; 2017 <a href="www.sqlite-sync.com" style="color:white">SQLite-sync.com</a> <br> All rights reserved</p>
 </ion-content>
-
-
