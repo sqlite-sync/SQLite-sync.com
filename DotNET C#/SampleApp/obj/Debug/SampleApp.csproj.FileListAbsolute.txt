@@ -44,3 +44,26 @@ C:\SQLite-sync.com\DotNetC#\SampleApp\SampleApp\obj\Debug\SampleApp.Form1.resour
 \\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\obj\Debug\SampleApp.Form1.resources
 \\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\obj\Debug\SampleApp.Properties.Resources.resources
 \\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SampleApp\obj\Debug\SampleApp.csproj.GenerateResource.Cache
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SampleApp\bin\Debug\SampleApp.exe.config
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SampleApp\obj\Debug\SampleApp.exe
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SampleApp\obj\Debug\SampleApp.pdb
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SampleApp\bin\Debug\SampleApp.exe
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SampleApp\bin\Debug\SampleApp.pdb
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SampleApp\bin\Debug\EntityFramework.dll
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SampleApp\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SampleApp\bin\Debug\Newtonsoft.Json.dll
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SampleApp\bin\Debug\RestSharp.dll
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SampleApp\bin\Debug\SQLiteSyncCOMDotNetClient.dll
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SampleApp\bin\Debug\System.Data.SQLite.dll
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SampleApp\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SampleApp\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SampleApp\bin\Debug\SQLiteSyncCOMDotNetClient.pdb
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SampleApp\bin\Debug\EntityFramework.xml
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SampleApp\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SampleApp\bin\Debug\Newtonsoft.Json.xml
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SampleApp\bin\Debug\RestSharp.xml
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SampleApp\bin\Debug\System.Data.SQLite.xml
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SampleApp\obj\Debug\SampleApp.csprojResolveAssemblyReference.cache
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SampleApp\obj\Debug\SampleApp.Form1.resources
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SampleApp\obj\Debug\SampleApp.Properties.Resources.resources
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SampleApp\obj\Debug\SampleApp.csproj.GenerateResource.Cache

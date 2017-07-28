@@ -34,3 +34,21 @@ C:\SQLite-sync.com\DotNetC#\SampleApp\SQLiteSyncCOMDotNetClient\bin\Debug\RestSh
 \\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SQLiteSyncCOMDotNetClient\obj\Debug\SQLiteSyncCOMDotNetClient.csprojResolveAssemblyReference.cache
 \\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SQLiteSyncCOMDotNetClient\obj\Debug\SQLiteSyncCOMDotNetClient.dll
 \\vmware-host\Shared Folders\Tomek On My Mac\Work\Amplifier\Projekty\SQLite-sync.com\Wersja 3.0\GitHub\SQLite-sync.com\DotNET C#\SQLiteSyncCOMDotNetClient\obj\Debug\SQLiteSyncCOMDotNetClient.pdb
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SQLiteSyncCOMDotNetClient\bin\Debug\SQLiteSyncCOMDotNetClient.dll.config
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SQLiteSyncCOMDotNetClient\bin\Debug\SQLiteSyncCOMDotNetClient.dll
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SQLiteSyncCOMDotNetClient\bin\Debug\SQLiteSyncCOMDotNetClient.pdb
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SQLiteSyncCOMDotNetClient\bin\Debug\EntityFramework.dll
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SQLiteSyncCOMDotNetClient\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SQLiteSyncCOMDotNetClient\bin\Debug\Newtonsoft.Json.dll
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SQLiteSyncCOMDotNetClient\bin\Debug\RestSharp.dll
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SQLiteSyncCOMDotNetClient\bin\Debug\System.Data.SQLite.dll
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SQLiteSyncCOMDotNetClient\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SQLiteSyncCOMDotNetClient\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SQLiteSyncCOMDotNetClient\bin\Debug\EntityFramework.xml
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SQLiteSyncCOMDotNetClient\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SQLiteSyncCOMDotNetClient\bin\Debug\Newtonsoft.Json.xml
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SQLiteSyncCOMDotNetClient\bin\Debug\RestSharp.xml
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SQLiteSyncCOMDotNetClient\bin\Debug\System.Data.SQLite.xml
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SQLiteSyncCOMDotNetClient\obj\Debug\SQLiteSyncCOMDotNetClient.csprojResolveAssemblyReference.cache
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SQLiteSyncCOMDotNetClient\obj\Debug\SQLiteSyncCOMDotNetClient.dll
+C:\Users\user\Documents\sqlite-sync.com\Ionic\SQLiteSyncDemo\DotNET C#\SQLiteSyncCOMDotNetClient\obj\Debug\SQLiteSyncCOMDotNetClient.pdb
