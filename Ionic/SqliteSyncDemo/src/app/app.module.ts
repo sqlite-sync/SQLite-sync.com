@@ -8,11 +8,13 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { SQLite } from '@ionic-native/sqlite';
 import { SqlitesyncServiceProvider } from '../providers/sqlitesync-service/sqlitesync-service';
+import { TablePage } from '../pages/table/table';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    TablePage
   ],
   imports: [
     BrowserModule,
@@ -22,7 +24,8 @@ import { SqlitesyncServiceProvider } from '../providers/sqlitesync-service/sqlit
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    TablePage
   ],
   providers: [
     StatusBar,

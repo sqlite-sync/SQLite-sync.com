@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular';
 import { SqlitesyncServiceProvider } from '../../providers/sqlitesync-service/sqlitesync-service';
+import { TablePage } from '../table/table';
 
 @Component({
   selector: 'page-home',
@@ -22,29 +23,28 @@ export class HomePage {
 
     //this.sqlitesync.sqlitesync_tables
 
+    let buttons_array = [];
+    let self = this;
+    this.sqlitesync.sqlitesync_tables.forEach(function(tbl_name){
+      buttons_array.push({
+        text: tbl_name,
+        handler: () => {
+          self.show(tbl_name);
+        }
+      });
+    });
+
     let actionSheet = this.actionSheetCtrl.create({
       title: "SELECT * FROM...",
-      buttons:[
-        {
-          text:"test1",
-          handler: () => {
-            console.log("test1 clicked");
-          }
-        },
-        {
-          text:"test2",
-          handler: () => {
-            console.log("test2 clicked");
-          }
-        },
-        {
-          text:"test3",
-          handler: () => {
-            console.log("test3 clicked");
-          }
-        }
-      ]
+      buttons: buttons_array
     });
     actionSheet.present();
   }
+
+  show(tbl_name){
+    this.navCtrl.push(TablePage, {
+      'tbl_name':tbl_name
+    });
+  }
+
 }
