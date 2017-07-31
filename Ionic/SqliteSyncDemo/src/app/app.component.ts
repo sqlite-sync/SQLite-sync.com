@@ -4,7 +4,7 @@ import { AlertController, LoadingController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { SQLite } from '@ionic-native/sqlite';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { HomePage } from '../pages/home/home';
 import { SqlitesyncServiceProvider } from '../providers/sqlitesync-service/sqlitesync-service';
 
@@ -24,17 +24,19 @@ export class MyApp {
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
-      this.openDatabase('sqlitesynccom_demo');
+      this.openDatabase();
     });
   }
 
-  openDatabase(name){
+  openDatabase(){
+    let name = 'sqlitesynccom_demo';
     let loading = this.loadingCtrl.create({
       content: 'Opening database. Please wait...'
     });
     loading.present();
-    let db = new SQLite();
-    this.sqlitesync.sqlitesync_DB = db.create({ name: name, location: 'default' }).then(() => {
+    let sqlite_db = new SQLite();
+    sqlite_db.create({ name: name, location: 'default' }).then((db: SQLiteObject) => {
+      this.sqlitesync.sqlitesync_DB = db;
       loading.dismiss();
     }, (error) => {
       loading.dismiss();
