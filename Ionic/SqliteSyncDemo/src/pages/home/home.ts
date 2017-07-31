@@ -38,5 +38,4 @@ export class HomePage {
     });
     actionSheet.present();
   }
-
 }
