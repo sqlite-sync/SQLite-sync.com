@@ -12,14 +12,16 @@ export class HomePage {
   public syncUrl = 'http://62f8a76e.ngrok.io/SqliteSync/API3';
 
   constructor(public navCtrl: NavController, public actionSheetCtrl: ActionSheetController, public sqlitesync: SqlitesyncServiceProvider) {
-
   }
 
   reinitializeDB(){
-    this.sqlitesync.ReinitializeDB(this.syncUrl, 1);
+    this.sqlitesync.ReinitializeDB(this.syncUrl, 1)
   }
 
   presentActionSheet(){
+
+    //this.sqlitesync.sqlitesync_tables
+
     let actionSheet = this.actionSheetCtrl.create({
       title: "SELECT * FROM...",
       buttons:[

@@ -8,12 +8,40 @@ import 'rxjs/add/operator/map';
 export class SqlitesyncServiceProvider {
 
   public sqlitesync_DB: SQLiteObject;
+  public sqlitesync_tables: any;
 
   constructor(public http: Http, public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
+    Promise.all([
+    this.getTables()
+    ]).then(val => {
+      if(!this.sqlitesync_tables)
+        this.sqlitesync_tables = [];
+    });
   }
 
+  private getTables(){
+    if(this.sqlitesync_DB){
+      this.sqlitesync_DB.executeSql("SELECT tbl_name FROM sqlite_master WHERE type='table'", {})
+      .then( (data) => {
+        if(!this.sqlitesync_tables)
+          this.sqlitesync_tables = [];
+        for (let i = 0; i < data.rows.length; i++){
+          if(data.rows.item(i).tbl_name !== "android_metadata")
+            this.sqlitesync_tables.push(data.rows.item(i).tbl_name);
+        }
+      })
+      .catch( error => {
+        this.sqlitesync_tables = [];
+      });
+    }
+  }
+
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 224b8273d0c5fb06ec7b613a6afe5361943e04e8
   public ReinitializeDB(syncUrl, subscriberId){
-    alert(this.sqlitesync_DB);
     let loading = this.loadingCtrl.create({
       content: 'Reinitializing...'
     });
@@ -23,7 +51,6 @@ export class SqlitesyncServiceProvider {
     this.http.get(URL)
     .map(res => res.json())
     .subscribe(res => {
-      loading.dismiss();
       let self = this;
       Object.keys(res)
       .sort()
@@ -36,6 +63,8 @@ export class SqlitesyncServiceProvider {
           //alert('Error ' + v + ' - ' + e.message);
         });
       });
+      this.getTables();
+      loading.dismiss();
     }, err => {
       loading.dismiss();
       let alert = this.alertCtrl.create({
