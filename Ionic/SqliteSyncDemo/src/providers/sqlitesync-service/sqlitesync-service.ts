@@ -12,11 +12,10 @@ export class SqlitesyncServiceProvider {
   constructor(public http: Http, public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
   }
 
-
   public ReinitializeDB(syncUrl, subscriberId){
     alert(this.sqlitesync_DB);
     let loading = this.loadingCtrl.create({
-      content: 'Reinitalizing...'
+      content: 'Reinitializing...'
     });
     loading.present();
     let URL = syncUrl + '/InitializeSubscriber/' + subscriberId;
@@ -47,5 +46,4 @@ export class SqlitesyncServiceProvider {
       alert.present();
     });
   }
-
 }
