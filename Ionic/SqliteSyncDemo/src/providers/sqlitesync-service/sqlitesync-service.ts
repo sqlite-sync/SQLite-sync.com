@@ -23,8 +23,7 @@ export class SqlitesyncServiceProvider {
     if(this.sqlitesync_DB){
       this.sqlitesync_DB.executeSql("SELECT tbl_name FROM sqlite_master WHERE type='table'", {})
       .then( (data) => {
-        if(!this.sqlitesync_tables)
-          this.sqlitesync_tables = [];
+        this.sqlitesync_tables = [];
         for (let i = 0; i < data.rows.length; i++){
           if(data.rows.item(i).tbl_name !== "android_metadata")
             this.sqlitesync_tables.push(data.rows.item(i).tbl_name);
