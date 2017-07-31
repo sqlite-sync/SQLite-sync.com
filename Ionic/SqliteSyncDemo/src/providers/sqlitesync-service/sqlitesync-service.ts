@@ -36,11 +36,6 @@ export class SqlitesyncServiceProvider {
     }
   }
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 224b8273d0c5fb06ec7b613a6afe5361943e04e8
   public ReinitializeDB(syncUrl, subscriberId){
     let loading = this.loadingCtrl.create({
       content: 'Reinitializing...'
