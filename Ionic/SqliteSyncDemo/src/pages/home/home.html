@@ -1,3 +1,4 @@
+
 <ion-header>
     <ion-title>
      <img class="logo" alt="SQLiteSync logo" height="60" src="assets/sqlite_sync_logo.png">
@@ -6,23 +7,23 @@
 
 <ion-content padding class="bg-style">
   <ion-list>
-  <ion-item class="item">
+  <ion-item>
     <ion-label color="primary">Sync URL</ion-label>
     <ion-input placeholder="Enter URL to synchronize" [(ngModel)]="syncUrl"></ion-input>
   </ion-item>
   <br>
   <br>
-    <button ion-button block class="button" (click)="reinitializeDB()">
+    <button ion-button round block class="button" (click)="reinitializeDB()">
       Reinitialize database
     </button>
     <br>
-    <button ion-button block class="button">
+    <button ion-button round block class="button">
       Synchronize database
     </button>
     <br>
-    <button ion-button block class="button" (click)="presentActionSheet()">
+    <button ion-button round block class="button" (click)="presentActionSheet()">
       SELECT * FROM
     </button>
   </ion-list>
-<p style="margin-bottom: 10px; color:white; position: fixed; bottom: 0; width:100%; text-align: center; font-size: 12px">&copy; 2017 <a href="www.sqlite-sync.com" style="color:white">SQLite-sync.com</a> <br> All rights reserved</p>
+<p class="footer">&copy; 2017 <a href="#" onclick="window.open('http://sqlite-sync.com', '_system', 'location=yes');" style="color:white">SQLite-sync.com</a><br> All rights reserved</p>
 </ion-content>

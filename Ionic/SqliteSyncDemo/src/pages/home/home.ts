@@ -25,21 +25,18 @@ export class HomePage {
       buttons:[
         {
           text:"test1",
-          role: 'destructive',
           handler: () => {
             console.log("test1 clicked");
           }
         },
         {
           text:"test2",
-          role: 'destructive',
           handler: () => {
             console.log("test2 clicked");
           }
         },
         {
           text:"test3",
-          role: 'destructive',
           handler: () => {
             console.log("test3 clicked");
           }
@@ -48,5 +45,4 @@ export class HomePage {
     });
     actionSheet.present();
   }
-
 }
