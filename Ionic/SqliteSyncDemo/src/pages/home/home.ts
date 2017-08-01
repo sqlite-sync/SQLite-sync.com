@@ -15,12 +15,12 @@ export class HomePage {
   constructor(public navCtrl: NavController, public actionSheetCtrl: ActionSheetController, public sqlitesync: SqlitesyncServiceProvider) {
   }
 
-  reinitializeDB(){
-    this.sqlitesync.ReinitializeDB(this.syncUrl, 1)
-  }
+    reinitializeDB(){
+      this.sqlitesync.ReinitializeDB(this.syncUrl, 1)
+    }
 
   presentActionSheet(){
-
+    
     //this.sqlitesync.sqlitesync_tables
 
     let buttons_array = [];
@@ -34,9 +34,15 @@ export class HomePage {
       });
     });
 
+    buttons_array.push({
+        text: 'Cancel',
+        role: 'cancel',
+        icon: 'close'
+      });
+
     let actionSheet = this.actionSheetCtrl.create({
       title: "SELECT * FROM...",
-      buttons: buttons_array
+      buttons: buttons_array,
     });
     actionSheet.present();
   }

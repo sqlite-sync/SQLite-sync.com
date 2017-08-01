@@ -9,12 +9,14 @@ import { HomePage } from '../pages/home/home';
 import { SQLite } from '@ionic-native/sqlite';
 import { SqlitesyncServiceProvider } from '../providers/sqlitesync-service/sqlitesync-service';
 import { TablePage } from '../pages/table/table';
+import { InsertPage } from '../pages/insert/insert';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    TablePage
+    TablePage,
+    InsertPage
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,8 @@ import { TablePage } from '../pages/table/table';
   entryComponents: [
     MyApp,
     HomePage,
-    TablePage
+    TablePage,
+    InsertPage
   ],
   providers: [
     StatusBar,
