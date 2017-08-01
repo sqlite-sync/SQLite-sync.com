@@ -54,19 +54,20 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:weightSum="1">
+
                 <GridView
                     android:id="@+id/gridView"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_margin="4dp"
-                    android:stretchMode="columnWidth"
+                    android:layout_weight="87.75"
                     android:gravity="center"
                     android:horizontalSpacing="1dp"
                     android:scrollbarAlwaysDrawHorizontalTrack="true"
                     android:scrollbarAlwaysDrawVerticalTrack="true"
                     android:scrollbars="horizontal"
-                    android:verticalSpacing="1dp"
-                    android:layout_weight="87.75"/>
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="1dp" />
             </LinearLayout>
         </FrameLayout>
     </HorizontalScrollView>

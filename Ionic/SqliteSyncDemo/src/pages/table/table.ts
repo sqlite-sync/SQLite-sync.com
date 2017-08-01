@@ -44,5 +44,4 @@ export class TablePage {
 
   ionViewDidLoad() {
   }
-
 }

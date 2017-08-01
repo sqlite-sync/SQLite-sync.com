@@ -16,3 +16,25 @@ page-table {
     float:right;
     right:8px;
 }
+
+body {
+    cursor: url('http://ionicframework.com/img/finger.png'), auto;
+}
+
+.header .col {
+    background-color:lightgrey;
+}
+
+.col {
+    border: solid 1px grey;
+    border-bottom-style: none;
+    border-right-style: none;
+}
+
+.col:last-child {
+    border-right: solid 1px grey;
+}
+
+.row:last-child .col {
+    border-bottom: solid 1px grey;
+}
