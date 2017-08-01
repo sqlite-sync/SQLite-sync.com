@@ -7,8 +7,8 @@ import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { SQLite } from '@ionic-native/sqlite';
-import { SqlitesyncServiceProvider } from '../providers/sqlitesync-service/sqlitesync-service';
 import { TablePage } from '../pages/table/table';
+import { SqliteServiceProvider } from '../providers/sqlite-service/sqlite-service';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,7 @@ import { TablePage } from '../pages/table/table';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     SQLite,
-    SqlitesyncServiceProvider
+    SqliteServiceProvider
   ]
 })
 export class AppModule {}

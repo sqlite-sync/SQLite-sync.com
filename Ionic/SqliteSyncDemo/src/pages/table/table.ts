@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { SqliteServiceProvider } from '../../providers/sqlite-service/sqlite-service';
+import { LoadingController } from 'ionic-angular';
 
-/**
- * Generated class for the TablePage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -16,13 +12,27 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class TablePage {
 
   public tbl_name;
+  public data;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public sqlite: SqliteServiceProvider, public loadingCtrl: LoadingController) {
+    let loading = this.loadingCtrl.create({
+      content: 'Loading data...'
+    });
+    loading.present();
     this.tbl_name = this.navParams.get('tbl_name');
+    this.sqlite.getDataFromTable(this.tbl_name)
+    .then((data) => {
+      this.data = data;
+      loading.dismiss();
+    })
+    .catch((error) => {
+      loading.dismiss();
+      alert('Error - ' + error);
+      this.navCtrl.pop();
+    });
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TablePage');
   }
 
 }

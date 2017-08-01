@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular';
-import { SqlitesyncServiceProvider } from '../../providers/sqlitesync-service/sqlitesync-service';
+import { SqliteServiceProvider } from '../../providers/sqlite-service/sqlite-service';
+import { LoadingController, AlertController } from 'ionic-angular';
 import { TablePage } from '../table/table';
+
+declare var sqlitesync_ReinitializeDB: any;
+declare var sqlitesync_SyncSendAndReceive: any;
+declare var sqlitesync_loading: any;
 
 @Component({
   selector: 'page-home',
@@ -10,22 +15,48 @@ import { TablePage } from '../table/table';
 })
 export class HomePage {
 
-  public syncUrl = 'http://62f8a76e.ngrok.io/SqliteSync/API3';
+  public syncUrl = 'http://f4239238.ngrok.io/SqliteSync/API3/';
+  public subscriberId = 1;
 
-  constructor(public navCtrl: NavController, public actionSheetCtrl: ActionSheetController, public sqlitesync: SqlitesyncServiceProvider) {
+  constructor(public navCtrl: NavController,
+    public actionSheetCtrl: ActionSheetController,
+    public sqlite: SqliteServiceProvider,
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController) 
+  {
   }
 
   reinitializeDB(){
-    this.sqlitesync.ReinitializeDB(this.syncUrl, 1)
+    let loading = this.loadingCtrl.create({
+      content: 'Reinitializing...'
+    });
+    loading.present();
+    sqlitesync_loading = true;
+    sqlitesync_ReinitializeDB(this.syncUrl, this.subscriberId);
+    while(this.isLoading() == true){}
+    this.sqlite.getTables()
+    .then(()=>{
+      loading.dismiss();
+    })
+    .catch((error)=>{
+      loading.dismiss();
+    });
+  }
+
+  synchronize(){
+    let loading = this.loadingCtrl.create({
+      content: 'Synchronizing...'
+    });
+    loading.present();
+    sqlitesync_SyncSendAndReceive(this.syncUrl, this.subscriberId);
+    loading.dismiss();
   }
 
   presentActionSheet(){
 
-    //this.sqlitesync.sqlitesync_tables
-
     let buttons_array = [];
     let self = this;
-    this.sqlitesync.sqlitesync_tables.forEach(function(tbl_name){
+    this.sqlite.sqlitesync_tables.forEach(function(tbl_name){
       buttons_array.push({
         text: tbl_name,
         handler: () => {
@@ -45,6 +76,10 @@ export class HomePage {
     this.navCtrl.push(TablePage, {
       'tbl_name':tbl_name
     });
+  }
+
+  isLoading(){
+    return sqlitesync_loading;
   }
 
 }

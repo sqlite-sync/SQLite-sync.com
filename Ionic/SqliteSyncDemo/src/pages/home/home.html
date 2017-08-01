@@ -14,10 +14,10 @@
   <br>
   <br>
     <button ion-button round block class="button" (click)="reinitializeDB()">
-      Reinitialize database
+      Reinitialize database{{isLoading()}}
     </button>
     <br>
-    <button ion-button round block class="button">
+    <button ion-button round block class="button" (click)="synchronize()">
       Synchronize database
     </button>
     <br>
