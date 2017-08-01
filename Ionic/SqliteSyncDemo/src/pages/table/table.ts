@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SqliteServiceProvider } from '../../providers/sqlite-service/sqlite-service';
 import { LoadingController } from 'ionic-angular';
+import { InsertPage } from '../insert/insert';
+import { HomePage } from '../home/home';
 
 
 @IonicPage()
@@ -30,6 +32,14 @@ export class TablePage {
       alert('Error - ' + error);
       this.navCtrl.pop();
     });
+  }
+
+  goBack(){
+    this.navCtrl.pop();
+  }
+
+  addPage(){
+    this.navCtrl.push(InsertPage);
   }
 
   ionViewDidLoad() {

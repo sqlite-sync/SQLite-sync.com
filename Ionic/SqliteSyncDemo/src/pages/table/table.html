@@ -1,18 +1,26 @@
-<!--
-  Generated template for the TablePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
     <ion-title>{{ tbl_name | uppercase}}</ion-title>
+     <button class="buttonAdd" ion-button (click)="addPage()">Add</button>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="bg-style">
 
+<!-- <div class="row">
+    <div>
+        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+            ... your content here ...
+        </div>
+        <div class="clearfix visible-lg" ng-if="($index + 1) % 6 == 0"></div>
+        <div class="clearfix visible-md" ng-if="($index + 1) % 4 == 0"></div>
+        <div class="clearfix visible-sm" ng-if="($index + 1) % 3 == 0"></div>
+        <div class="clearfix visible-xs" ng-if="($index + 1) % 2 == 0"></div>
+    </div>
+</div> -->
+
+ <button ion-button block class="buttonBack" (click)="goBack()">
+      Back
+    </button> 
 </ion-content>

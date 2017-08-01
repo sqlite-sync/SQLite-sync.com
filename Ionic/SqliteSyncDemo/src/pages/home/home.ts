@@ -65,9 +65,15 @@ export class HomePage {
       });
     });
 
+    buttons_array.push({
+        text: 'Cancel',
+        role: 'cancel',
+        icon: 'close'
+      });
+
     let actionSheet = this.actionSheetCtrl.create({
       title: "SELECT * FROM...",
-      buttons: buttons_array
+      buttons: buttons_array,
     });
     actionSheet.present();
   }
