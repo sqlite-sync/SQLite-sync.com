@@ -4,21 +4,27 @@
     </ion-title>
 </ion-header>
 
+<link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
+    <script src="//code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
 
 <ion-content padding class="bg-style">
-
-<!-- <div class="row">
-    <div>
-        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-            ... your content here ...
-        </div>
-        <div class="clearfix visible-lg" ng-if="($index + 1) % 6 == 0"></div>
-        <div class="clearfix visible-md" ng-if="($index + 1) % 4 == 0"></div>
-        <div class="clearfix visible-sm" ng-if="($index + 1) % 3 == 0"></div>
-        <div class="clearfix visible-xs" ng-if="($index + 1) % 2 == 0"></div>
-    </div>
-</div> -->
-
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <button ion-button block style="background-color: #5a595B; color: white" (click)="editBtn()">
+      Edit
+    </button> 
+    </ion-col>
+    <ion-col>
+     <button ion-button block style="background-color: #5a595B; color: white" (click)="deleteBtn()">
+      Delete
+     </button>
+    </ion-col>
+    <ion-col col-auto>
+      test
+    </ion-col>
+  </ion-row>
+</ion-grid>
  <button ion-button block class="buttonBack" (click)="goBack()">
       Back
     </button> 

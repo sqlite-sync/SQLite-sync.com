@@ -34,5 +34,4 @@ export class TablePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad TablePage');
   }
-
 }
