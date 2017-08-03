@@ -15,7 +15,7 @@ declare var sqlitesync_loading: any;
 })
 export class HomePage {
 
-  public syncUrl = 'http://f4239238.ngrok.io/SqliteSync/API3/';
+  public syncUrl = 'http://65710078.ngrok.io/SqliteSync/API3/';
   public subscriberId = 1;
 
   constructor(public navCtrl: NavController,
