@@ -60,14 +60,14 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_margin="4dp"
-                    android:layout_weight="87.75"
+                    android:stretchMode="columnWidth"
                     android:gravity="center"
                     android:horizontalSpacing="1dp"
                     android:scrollbarAlwaysDrawHorizontalTrack="true"
                     android:scrollbarAlwaysDrawVerticalTrack="true"
                     android:scrollbars="horizontal"
-                    android:stretchMode="columnWidth"
-                    android:verticalSpacing="1dp" />
+                    android:verticalSpacing="1dp"
+                    android:layout_weight="87.75" />
             </LinearLayout>
         </FrameLayout>
     </HorizontalScrollView>
