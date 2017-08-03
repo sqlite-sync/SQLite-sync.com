@@ -14,9 +14,11 @@ import { HomePage } from '../home/home';
 export class TablePage {
 
   public tbl_name;
-  public data;
-
+  public rows;
+  public columns;
   constructor(public navCtrl: NavController, public navParams: NavParams, public sqlite: SqliteServiceProvider, public loadingCtrl: LoadingController) {
+    this.rows = [];
+    this.columns = [];
     let loading = this.loadingCtrl.create({
       content: 'Loading data...'
     });
@@ -24,7 +26,10 @@ export class TablePage {
     this.tbl_name = this.navParams.get('tbl_name');
     this.sqlite.getDataFromTable(this.tbl_name)
     .then((data) => {
-      this.data = data;
+      this.rows = data;
+        for(let key in data[0]){
+          this.columns.push({'name': key, 'type': typeof((data[0])[key])});
+        }
       loading.dismiss();
     })
     .catch((error) => {

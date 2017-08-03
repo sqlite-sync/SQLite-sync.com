@@ -15,7 +15,7 @@ declare var sqlitesync_loading: any;
 })
 export class HomePage {
 
-  public syncUrl = 'http://f4239238.ngrok.io/SqliteSync/API3/';
+  public syncUrl = 'http://65710078.ngrok.io/SqliteSync/API3/';
   public subscriberId = 1;
 
   constructor(public navCtrl: NavController,
@@ -33,7 +33,6 @@ export class HomePage {
     loading.present();
     sqlitesync_loading = true;
     sqlitesync_ReinitializeDB(this.syncUrl, this.subscriberId);
-    while(this.isLoading() == true){}
     this.sqlite.getTables()
     .then(()=>{
       loading.dismiss();

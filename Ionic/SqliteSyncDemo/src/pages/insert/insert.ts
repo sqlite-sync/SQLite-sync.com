@@ -24,7 +24,7 @@ export class InsertPage {
   }
 
   backToTable(){
-    this.navCtrl.push(TablePage);
+    this.navCtrl.pop();
   }
 
   submitButton(){

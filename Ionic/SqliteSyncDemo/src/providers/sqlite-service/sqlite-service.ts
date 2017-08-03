@@ -68,7 +68,10 @@ export class SqliteServiceProvider {
       if(sqlitesync_DB){
         sqlitesync_DB.executeSql("SELECT * FROM " + tableName, {})
         .then( (data) => {
-          resolve(data);
+          let rows = [];
+          for(let i = 0; i < data.rows.length; i++)
+            rows.push(data.rows.item(i));
+          resolve(rows);
         })
         .catch( error => {
           alert('Error - ' + error);
