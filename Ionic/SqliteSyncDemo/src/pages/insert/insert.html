@@ -1,6 +1,6 @@
 
 <ion-content padding class="bg-style">
-  <p style="color:white">INSERT INTO</p>
+  <p style="color:white; font-size:20px;">INSERT INTO <br>[{{ tbl_name | uppercase}}]</p>
   <ion-input type="text" autofocus style="color:white"></ion-input>
     <button ion-button (click)="backToTable()">
       Back
@@ -8,7 +8,6 @@
     <button ion-button (click)="submitButton()">
       Submit
     </button>
-    <br>
     <br>
     <p style="color:white">
       * Leave identity column unchanged<br>

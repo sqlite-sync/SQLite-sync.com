@@ -30,7 +30,7 @@ export class TablePage {
     .catch((error) => {
       loading.dismiss();
       alert('Error - ' + error);
-      this.navCtrl.pop();
+      this.navCtrl.push(InsertPage);
     });
   }
 
@@ -39,7 +39,9 @@ export class TablePage {
   }
 
   addPage(){
-    this.navCtrl.push(InsertPage);
+    this.navCtrl.push(InsertPage, {
+      'tbl_name': this.tbl_name
+    });
   }
 
   ionViewDidLoad() {

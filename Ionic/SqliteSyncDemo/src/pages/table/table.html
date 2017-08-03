@@ -1,8 +1,6 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>{{ tbl_name | uppercase}}</ion-title>
-     <button class="buttonAdd" ion-button (click)="addPage()">Add</button>
-  </ion-navbar>
+    <p style="color:white; font-size:20px; text-indent:20px;">{{ tbl_name | uppercase}}
+     <button class="buttonAdd" ion-button (click)="addPage()">Add</button></p>
 </ion-header>
 
 <link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
@@ -11,16 +9,6 @@
 <ion-content padding class="bg-style">
 <ion-grid>
   <ion-row>
-    <ion-col>
-      <button ion-button block style="background-color: #5a595B; color: white" (click)="editBtn()">
-      Edit
-    </button> 
-    </ion-col>
-    <ion-col>
-     <button ion-button block style="background-color: #5a595B; color: white" (click)="deleteBtn()">
-      Delete
-     </button>
-    </ion-col>
     <ion-col col-auto>
       test
     </ion-col>

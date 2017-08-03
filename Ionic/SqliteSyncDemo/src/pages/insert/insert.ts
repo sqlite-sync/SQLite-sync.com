@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TablePage } from '../table/table';
+import { SqliteServiceProvider } from '../../providers/sqlite-service/sqlite-service';
 
 /**
  * Generated class for the InsertPage page.
@@ -16,7 +17,13 @@ import { TablePage } from '../table/table';
 })
 export class InsertPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public tbl_name;
+  public data;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public sqlite: SqliteServiceProvider) {
+
+    this.tbl_name = this.navParams.get('tbl_name');
+    
   }
 
   ionViewDidLoad() {
@@ -24,11 +31,10 @@ export class InsertPage {
   }
 
   backToTable(){
-    this.navCtrl.push(TablePage);
+    this.navCtrl.pop();
   }
 
   submitButton(){
     
   }
-
 }

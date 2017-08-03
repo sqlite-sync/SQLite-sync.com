@@ -33,7 +33,6 @@ export class HomePage {
     loading.present();
     sqlitesync_loading = true;
     sqlitesync_ReinitializeDB(this.syncUrl, this.subscriberId);
-    while(this.isLoading() == true){}
     this.sqlite.getTables()
     .then(()=>{
       loading.dismiss();
