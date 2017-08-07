@@ -45,7 +45,8 @@ export class TablePage {
 
   addPage(){
     this.navCtrl.push(InsertPage, {
-      'tbl_name': this.tbl_name
+      'tbl_name': this.tbl_name,
+      'columns': this.columns
     });
   }
 

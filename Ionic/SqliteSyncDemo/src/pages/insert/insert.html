@@ -1,7 +1,7 @@
 
 <ion-content padding class="bg-style">
-  <p style="color:white; font-size:20px;">INSERT INTO <br>[{{ tbl_name | uppercase}}]</p>
-  <ion-input type="text" autofocus style="color:white"></ion-input>
+  <p style="color:white; font-size:20px;">INSERT INTO <br>[{{ tbl_name | uppercase}}]<br>{{ columns }}</p>
+  <ion-input class="input" type="text" autofocus style="color:white"></ion-input>
     <button ion-button (click)="backToTable()">
       Back
     </button>
