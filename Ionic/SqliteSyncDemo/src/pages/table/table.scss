@@ -38,3 +38,11 @@ body {
 .row:last-child .col {
     border-bottom: solid 1px grey;
 }
+
+.wide-as-needed {
+  overflow: scroll;
+  white-space: nowrap;
+}
+.scroll { 
+  min-width: 100%;
+}

@@ -7,16 +7,17 @@ import { TablePage } from '../table/table';
 
 declare var sqlitesync_ReinitializeDB: any;
 declare var sqlitesync_SyncSendAndReceive: any;
-declare var sqlitesync_loading: any;
+declare var sqlitesync_loading: boolean;
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-
-  public syncUrl = 'http://65710078.ngrok.io/SqliteSync/API3/';
+  public syncUrl = 'http://18aa1aea.ngrok.io/SqliteSync/API3/';
   public subscriberId = 1;
+  public loadingText = 'Reinitializing...';
+  public isLoading = function(){return sqlitesync_loading;};
 
   constructor(public navCtrl: NavController,
     public actionSheetCtrl: ActionSheetController,
@@ -27,28 +28,15 @@ export class HomePage {
   }
 
   reinitializeDB(){
-    let loading = this.loadingCtrl.create({
-      content: 'Reinitializing...'
-    });
-    loading.present();
-    sqlitesync_loading = true;
+    this.loadingText = 'Reinitializing...';
     sqlitesync_ReinitializeDB(this.syncUrl, this.subscriberId);
-    this.sqlite.getTables()
-    .then(()=>{
-      loading.dismiss();
-    })
-    .catch((error)=>{
-      loading.dismiss();
-    });
+    this.sqlite.getTables();
+  
   }
 
   synchronize(){
-    let loading = this.loadingCtrl.create({
-      content: 'Synchronizing...'
-    });
-    loading.present();
+    this.loadingText = 'Synchronizing...';
     sqlitesync_SyncSendAndReceive(this.syncUrl, this.subscriberId);
-    loading.dismiss();
   }
 
   presentActionSheet(){
@@ -56,8 +44,7 @@ export class HomePage {
     let buttons_array = [];
     let self = this;
     this.sqlite.sqlitesync_tables.forEach(function(tbl_name){
-      buttons_array.push({
-        text: tbl_name,
+      buttons_array.push({        text: tbl_name,
         handler: () => {
           self.show(tbl_name);
         }
@@ -81,10 +68,6 @@ export class HomePage {
     this.navCtrl.push(TablePage, {
       'tbl_name':tbl_name
     });
-  }
-
-  isLoading(){
-    return sqlitesync_loading;
   }
 
 }

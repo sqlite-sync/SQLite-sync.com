@@ -6,7 +6,13 @@
 </ion-header>
 
 <ion-content padding class="bg-style">
-  <ion-list>
+  test: {{isLoading()}}
+  <div class="spinner" *ngIf="isLoading()">
+    <ion-spinner name="crescent"></ion-spinner>
+    <br/>
+    <h2>{{ loadingText }}</h2>
+  </div>
+  <ion-list *ngIf="!isLoading()">
   <ion-item>
     <ion-label color="primary">Sync URL</ion-label>
     <ion-input placeholder="Enter URL to synchronize" [(ngModel)]="syncUrl"></ion-input>
@@ -14,7 +20,7 @@
   <br>
   <br>
     <button ion-button round block class="button" (click)="reinitializeDB()">
-      Reinitialize database{{isLoading()}}
+      Reinitialize database
     </button>
     <br>
     <button ion-button round block class="button" (click)="synchronize()">

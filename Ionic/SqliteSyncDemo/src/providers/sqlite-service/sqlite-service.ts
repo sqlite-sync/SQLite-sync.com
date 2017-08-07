@@ -81,4 +81,33 @@ export class SqliteServiceProvider {
 
   }
 
+  insertIntoTable(tableName, data){
+    return new Promise((resolve,reject) => {
+      if(sqlitesync_DB){
+        let columnList = '';
+        let valuesList = '';
+        Object.keys(data).forEach(function(key){
+          columnList += key + ',';
+          valuesList += (typeof(data[key]) == 'number') ? (data[key] + ',') : ("'" + data[key] + "',");
+        });
+        columnList = columnList.substr(0, columnList.length - 1);
+        valuesList = valuesList.substr(0, valuesList.length - 1);
+
+        let query = "INSERT INTO " + tableName + "(" + columnList + ") VALUES (" + valuesList + ");";
+        alert(query);
+        sqlitesync_DB.executeSql(query, {})
+        .then( (data) => {
+          resolve();
+        })
+        .catch(error => {
+          reject(error);
+        });
+      }
+      else {
+        reject();
+      }
+    });
+  }
+
+
 }
