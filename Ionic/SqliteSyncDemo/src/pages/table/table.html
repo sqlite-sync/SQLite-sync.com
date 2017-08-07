@@ -7,34 +7,21 @@
     <script src="//code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
 
 <ion-content padding class="bg-style">
-<<<<<<< HEAD
   <ion-scroll scrollX="true" scrollY="true" style="height:67vh">
   <table>
   <tr nowrap>
-    <td *ngFor="let column of columns">
-=======
-<ion-grid>
-  <ion-row>
-    <ion-col col-auto *ngFor="let column of columns">
->>>>>>> 155de9b2ea8217165be214377b92d53a268d7b20
+    <td *ngFor="let column of columns" style="color:white">
       {{ column.name }}
     </td>
   </tr>
-   <tr *ngFor="let row of rows" nowrap> 
+   <tr *ngFor="let row of rows" nowrap style="color:white"> 
       <td *ngFor="let key of columns">
       {{ row[key.name] }}
-<<<<<<< HEAD
     </td>
    </tr> 
 </table>
   </ion-scroll>
 <button ion-button block class="buttonBack" (click)="goBack()">
-=======
-    </ion-col>
-  </ion-row>
-</ion-grid>
- <button ion-button block class="buttonBack" (click)="goBack()">
->>>>>>> 155de9b2ea8217165be214377b92d53a268d7b20
       Back
   </button> 
 </ion-content>

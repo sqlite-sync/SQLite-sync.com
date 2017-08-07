@@ -42,10 +42,13 @@ body {
     width: 100px;
 }
 
-<<<<<<< HEAD
 table, td, th {
-border: 1px solid black;
+border: 1px solid white;
 padding:0 15px 0 15px;
+}
+
+table{
+  border-collapse: collapse;
 }
 
 // .row{
@@ -139,12 +142,3 @@ padding:0 15px 0 15px;
 // color: #fff;
 //   font-weight: bold;
 // }
-=======
-.wide-as-needed {
-  overflow: scroll;
-  white-space: nowrap;
-}
-.scroll { 
-  min-width: 100%;
-}
->>>>>>> 155de9b2ea8217165be214377b92d53a268d7b20
