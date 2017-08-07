@@ -4,8 +4,7 @@ function sqlitesync_AddLog(logMsg){
 
 function sqlitesync_SyncEnd(){
     sqlitesync_AddAlert('Synchronization completed!');
-    sqlitesync_loading = false;
-    resolve();
+    sqlitesync_AddAlert(sqlitesync_loading);
 }
 
 function sqlitesync_AddAlert(alertMsg){

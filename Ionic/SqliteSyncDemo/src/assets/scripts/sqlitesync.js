@@ -7,13 +7,16 @@ var sqlitesync_DB;
 
 var sqlitesync_syncPdaIdent = null;
 
-var sqlitesync_loading = true;
+var sqlitesync_loading = false;
 
 /**
  * Synchronize (send/recieve) changes with server, we start here with synchronization process
  */
 
 function sqlitesync_SyncSendAndReceive(syncServer, syncPdaIdent) {
+    
+    sqlitesync_loading = true;
+
     sqlitesync_SyncServerURL = syncServer;
     sqlitesync_syncPdaIdent = syncPdaIdent;
 
@@ -47,6 +50,7 @@ function sqlitesync_SyncSendAndReceive(syncServer, syncPdaIdent) {
     }).then(()=>{
         sqlitesync_SyncSendData();
     }).catch((error) => {
+        sqlitesync_loading = false;
         sqlitesync_AddAlert('Error while syncing with the server - ' + error);
     });
 
@@ -204,8 +208,10 @@ function sqlitesync_SyncTables(){
 
 								if(sqlitesync_SyncTableCurrentIndex < sqlitesync_SyncTableList.length)
 									sqlitesync_SyncTables();
-								else
-									sqlitesync_SyncEnd();
+								else{
+                                    sqlitesync_loading = false;
+                                    sqlitesync_SyncEnd();
+                                }
 							},
 							error: function (result, request) {
 								var statusCode = result.status;
@@ -215,16 +221,22 @@ function sqlitesync_SyncTables(){
 
 								if(sqlitesync_SyncTableCurrentIndex < sqlitesync_SyncTableList.length)
 									sqlitesync_SyncTables();
-								else
-									sqlitesync_SyncEnd();
+								else{
+                                    sqlitesync_loading = false;
+                                    sqlitesync_SyncEnd();
+                               }
 							}
 						});
 					} else {
 						sqlitesync_SyncTableCurrentIndex++;
 						if(sqlitesync_SyncTableCurrentIndex < sqlitesync_SyncTableList.length)
 							sqlitesync_SyncTables();
-						else
-							sqlitesync_SyncEnd();
+						else{
+                            sqlitesync_loading = false;
+                            sqlitesync_SyncEnd();
+                            alert('Test');
+                            alert(sqlitesync_loading);
+                        }
 					}
                     
                 }).catch((error)=>{
@@ -232,18 +244,23 @@ function sqlitesync_SyncTables(){
 					sqlitesync_SyncTableCurrentIndex++
 					if(sqlitesync_SyncTableCurrentIndex < sqlitesync_SyncTableList.length)
 						sqlitesync_SyncTables();
-					else
-						sqlitesync_SyncEnd();
+					else{
+                        sqlitesync_loading = false;
+                        sqlitesync_SyncEnd();
+                    }
                 });
 			} else {
 				sqlitesync_SyncTableCurrentIndex++
 				if(sqlitesync_SyncTableCurrentIndex < sqlitesync_SyncTableList.length)
 					sqlitesync_SyncTables();
-				else
+				else{
+                    sqlitesync_loading = false;
 					sqlitesync_SyncEnd();
+                }
 			}
         },
         error: function (result, request) {
+            sqlitesync_loading = false;
             var statusCode = result.status;
             var responseText = result.responseText;
             sqlitesync_AddAlert('Error while syncing with the server ' + responseText);
@@ -457,6 +474,7 @@ function sqlitesync_SyncSendToServer() {
             sqlitesync_SyncTables();
         },
         error: function (result, request) {
+            sqlitesync_loading = false;
             var statusCode = result.status;
             var responseText = result.responseText;
             sqlitesync_AddLog('<p>Error while syncing with the server ' + responseText + '</p>');
@@ -507,7 +525,7 @@ function sqlitesync_ReinitializeDB(syncServer, syncPdaIdent) {
 
             }).then(()=>{
                 sqlitesync_loading = false;
-                sqlitesync_AddAlert('Initialization completed');
+                sqlitesync_AddLog('Initialization completed');
             }).catch((error) => {
                 sqlitesync_loading = false;
                 sqlitesync_AddAlert('Error while syncing with the server - ' + error);

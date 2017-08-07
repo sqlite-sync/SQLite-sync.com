@@ -19,11 +19,14 @@ export class TablePage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public sqlite: SqliteServiceProvider, public loadingCtrl: LoadingController) {
     this.rows = [];
     this.columns = [];
+    this.tbl_name = this.navParams.get('tbl_name');
+  }
+
+  ionViewWillEnter(){
     let loading = this.loadingCtrl.create({
       content: 'Loading data...'
     });
     loading.present();
-    this.tbl_name = this.navParams.get('tbl_name');
     this.sqlite.getDataFromTable(this.tbl_name)
     .then((data) => {
       this.rows = data;

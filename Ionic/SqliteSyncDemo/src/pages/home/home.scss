@@ -26,3 +26,17 @@ page-home {
     text-align: center;
     font-size: 14px
 }
+div.spinner {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  height: 400px;
+  text-align: center;
+}
+ion-spinner {
+  transform: scale(2);
+} 
+
+ion-spinner *{
+  stroke: white !important;
+}
