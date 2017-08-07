@@ -10,12 +10,12 @@
   <ion-scroll scrollX="true" scrollY="true" style="height:67vh">
   <table>
   <tr nowrap>
-    <td *ngFor="let column of columns" style="color:white">
+    <td *ngFor="let column of columns" bgcolor="#ffffff" style="color:black; size:30px; font-weight:bold;" nowrap>
       {{ column.name }}
     </td>
   </tr>
-   <tr *ngFor="let row of rows" nowrap style="color:white"> 
-      <td *ngFor="let key of columns">
+   <tr *ngFor="let row of rows" nowrap bgcolor="#ffffff" style="color:black; size:30px;" nowrap> 
+      <td *ngFor="let key of columns" nowrap>
       {{ row[key.name] }}
     </td>
    </tr> 
