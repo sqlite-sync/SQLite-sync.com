@@ -42,5 +42,5 @@ Automatic mobile schema creation if required.
 Various platforms supported.
 Two subsriptions: Paid and Open-Source
 
-Find out more at: www.sqlite-sync.com
+Find out more at: https://ampliapps.com/sqlite-sync/
 
