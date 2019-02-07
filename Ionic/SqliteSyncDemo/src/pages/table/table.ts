@@ -46,17 +46,37 @@ export class TablePage {
     this.loadingText = "Getting data from table...";
     this.rows = [];
     this.columns = [];
+
     this.sqliteSync.getDataFromTable(this.tblName).then((data) => {
       this.rows = data;
-      for(let key in data[0])
-        if(key.toLowerCase() !== "MergeUpdate".toLowerCase() && key.toLowerCase() !== "RowId".toLowerCase())
+      this.sqliteSync.getTableColumns(this.tblName).then((columns: any) => {
+      for(let column of columns) {
+        if(column.name.toLowerCase() !== "MergeUpdate".toLowerCase() && column.name.toLowerCase() !== "RowId".toLowerCase()) {
           this.columns.push({
-            'name': key,
-            'type': typeof((data[0])[key])
+            'name': column.name,
+            'type': column.type
           });
-      this.isLoading = false;
+        }
+      }
+        this.isLoading = false;
+      }).catch((err) => {
+        console.log(err);
+        let alert = this.alertCtrl.create({
+          title: "Error",
+          subTitle: "Error while loading data.",
+          buttons: ["OK"]
+        });
+        alert.present();
+        this.isLoading = false;
+      });
     }).catch((err) => {
       this.isLoading = false;
+      let alert = this.alertCtrl.create({
+        title: "Error",
+        subTitle: "Error while loading data.",
+        buttons: ["OK"]
+      });
+      alert.present();
       console.log(err);
     });
   }

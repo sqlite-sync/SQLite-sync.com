@@ -43,10 +43,11 @@ export class InsertPage {
   }
 
   getType(type){
-    switch(type){
+    switch(type.toLowerCase()){
       case 'string':
         return 'text';
       case 'number':
+      case 'integer':
         return 'number';
       default:
         return 'text';

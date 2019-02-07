@@ -30,6 +30,8 @@ export class SqliteSyncProvider {
     });
   }
 
+
+  
   getTables(){
     return new Promise((resolve,reject) => {
       this.openDatabase().then((db: SQLiteObject) => {
@@ -43,6 +45,26 @@ export class SqliteSyncProvider {
         .catch((err) => {
           reject("Error while getting data from database!");
         })
+      })
+      .catch((err) => {
+        reject("Error while connecting to local database!");
+      })
+    })
+  }
+
+  getTableColumns(tblName) {
+    return new Promise((resolve,reject) => {
+      this.openDatabase().then((db: SQLiteObject) => {
+        db.executeSql("SELECT * FROM pragma_table_info('" + tblName + "')", [])
+        .then((data) => {
+          let rows = [];
+          for(let i = 0; i < data.rows.length; i++)
+            rows.push(data.rows.item(i));
+          resolve(rows);
+        })
+        .catch((err) => {
+          reject("Error while getting data from database!");
+        });
       })
       .catch((err) => {
         reject("Error while connecting to local database!");
@@ -199,7 +221,7 @@ deleteFromTable(tblName, row){
             });
           });
         }, (err) => {
-          reject("Error while connecting to local database!");
+          reject("Error while requesting API!");
         });
     });
   }

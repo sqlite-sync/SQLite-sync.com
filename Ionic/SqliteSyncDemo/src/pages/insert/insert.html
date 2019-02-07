@@ -16,7 +16,7 @@
   <ion-list style="background-color:#4FAEDD;">
     <ion-item *ngFor="let column of columns" style="background-color:#4FAEDD;">
       <ion-label style="color:#ffffff" floating>{{column.name}}</ion-label>
-      <ion-input [(ngModel)]="insertModel[column.name]" type={{column.inputType}}></ion-input>
+      <ion-input [(ngModel)]="insertModel[column.name]" [type]="column.inputType"></ion-input>
     </ion-item>
   </ion-list>
     <br>
