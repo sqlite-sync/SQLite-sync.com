@@ -1,4 +1,4 @@
-SQLite-sync.com version 3
+AMPLI-SYNC community edition 1.0.1
 ===============
 
 For samples for older version 2.x see branch 'clients-for-v2.x'
