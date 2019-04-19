@@ -62,7 +62,7 @@
                     android:textSize="15dp"
                     android:layout_weight="0.06"
                     android:textColor="#47525e"
-                    android:text="http://demo.sqlite-sync.com:8081/SqliteSync/API3" />
+                    android:text="http://192.168.2.199:8080/SqliteSync1299/API3" />
             </TableRow>
         </TableLayout>
     </FrameLayout>

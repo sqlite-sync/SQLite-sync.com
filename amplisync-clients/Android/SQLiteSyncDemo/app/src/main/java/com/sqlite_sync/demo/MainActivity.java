@@ -1,10 +1,14 @@
 package com.sqlite_sync.demo;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
+import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +17,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sqlite_sync.SQLiteSync;
 
@@ -23,21 +28,35 @@ import java.util.UUID;
 public class MainActivity extends AppCompatActivity {
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+//            case REQUEST_READ_PHONE_STATE:
+//                if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+//                    //TODO
+//                }
+//                break;
+
+            default:
+                break;
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
-        ((TextView)findViewById(R.id.tbSqlite_sync_url)).setText(preferences.getString("sqlite_sync_url", "http://demo.sqlite-sync.com:8081/SqliteSync/API3"));
+        ((TextView) findViewById(R.id.tbSqlite_sync_url)).setText(preferences.getString("sqlite_sync_url", "http://192.168.2.199:8080/SqliteSync1299/API3"));
 
         findViewById(R.id.btReinitialize).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showProgressBar();
-                final Button button = (Button)view;
+                final Button button = (Button) view;
                 button.setEnabled(false);
 
-                String sqlite_sync_url = ((TextView)findViewById(R.id.tbSqlite_sync_url)).getText().toString();
+                String sqlite_sync_url = ((TextView) findViewById(R.id.tbSqlite_sync_url)).getText().toString();
                 SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("sqlite_sync_url", sqlite_sync_url);
@@ -68,10 +87,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showProgressBar();
-                final Button button = (Button)view;
+                final Button button = (Button) view;
                 button.setEnabled(false);
 
-                String sqlite_sync_url = ((TextView)findViewById(R.id.tbSqlite_sync_url)).getText().toString();
+                String sqlite_sync_url = ((TextView) findViewById(R.id.tbSqlite_sync_url)).getText().toString();
                 SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("sqlite_sync_url", sqlite_sync_url);
@@ -106,18 +125,17 @@ public class MainActivity extends AppCompatActivity {
                 SQLiteDatabase db = null;
                 Cursor cursor = null;
 
-                try{
+                try {
                     db = openOrCreateDatabase("/data/data/" + getPackageName() + "/sqlitesync.db", 1, null);
                     cursor = db.rawQuery("select tbl_Name from sqlite_master where type='table'", null);
-                    while (cursor.moveToNext()){
+                    while (cursor.moveToNext()) {
                         tables.add(cursor.getString(0));
                     }
-                }
-                finally {
-                    if(cursor != null && !cursor.isClosed()){
+                } finally {
+                    if (cursor != null && !cursor.isClosed()) {
                         cursor.close();
                     }
-                    if(db != null && db.isOpen()){
+                    if (db != null && db.isOpen()) {
                         db.close();
                     }
                 }
@@ -130,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
                         ), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                TableViewActivity.SelectFrom(MainActivity.this, (String)((AlertDialog)dialog).getListView().getAdapter().getItem(which));
+                                TableViewActivity.SelectFrom(MainActivity.this, (String) ((AlertDialog) dialog).getListView().getAdapter().getItem(which));
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -145,13 +163,25 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private String getSubscriberId(){
+    private String getSubscriberId() {
         final TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
 
         final String tmDevice, tmSerial, androidId;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    Activity#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for Activity#requestPermissions for more details.
+                //return "Permission READ_PHONE_STATE needed.";
+            }
+        }
         tmDevice = "" + tm.getDeviceId();
         tmSerial = "" + tm.getSimSerialNumber();
-        androidId = "" + android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
+        androidId = "" + Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
 
         UUID deviceUuid = new UUID(androidId.hashCode(), ((long)tmDevice.hashCode() << 32) | tmSerial.hashCode());
         return deviceUuid.toString();
