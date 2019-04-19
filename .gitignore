@@ -19,3 +19,5 @@ sync.properties
 log/
 target/
 amplisync-ws/lib
+amplisync-core/out
+amplisync-ws/out
