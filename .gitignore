@@ -1,3 +1,21 @@
 working dir/SyncData
 working dir/ReceivedData
 sync.properties
+# Add any directories, files, or patterns you don't want to be tracked by version control
+# Eclipse
+.classpath
+.project
+.settings/
+ 
+# Intellij
+.idea/
+*.iml
+*.iws
+ 
+# Mac
+.DS_Store
+ 
+# Maven
+log/
+target/
+amplisync-ws/lib
