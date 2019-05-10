@@ -235,7 +235,8 @@ deleteFromTable(tblName, row){
             let tables = [];
             db.executeSql("select tbl_Name from sqlite_master where type='table' and tbl_Name != 'android_metadata'", []).then((result) => {
               for(let i = 0; i < result.rows.length; i++)
-                tables.push(result.rows.item(i).tbl_name);
+                if (result.rows.item(i).tbl_name.toLowerCase() !== "MergeDelete".toLowerCase())
+                  tables.push(result.rows.item(i).tbl_name);
 
                 var promises = tables.map(tbl => {
                   return this.getRemoteChangesForTable(syncUrl, subscriberId, tbl);
