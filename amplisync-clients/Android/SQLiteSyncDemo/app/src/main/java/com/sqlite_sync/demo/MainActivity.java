@@ -9,6 +9,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,27 +30,79 @@ import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-//            case REQUEST_READ_PHONE_STATE:
-//                if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-//                    //TODO
-//                }
-//                break;
 
-            default:
-                break;
+    private static final int STORAGE_PERMISSION_CODE = 101;
+    private static final int READ_PHONE_STATE = 102;
+
+    // Function to check and request permission
+    public void checkPermission(String permission, int requestCode)
+    {
+
+        // Checking if permission is not granted
+        if (ContextCompat.checkSelfPermission(MainActivity.this,permission) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(
+                            MainActivity.this,
+                            new String[] { permission },
+                            requestCode);
+        }
+        else {
+            Toast.makeText(MainActivity.this,
+                            "Permission already granted",
+                            Toast.LENGTH_SHORT).show();
         }
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode,
+                        permissions,
+                        grantResults);
+
+        if (requestCode == STORAGE_PERMISSION_CODE) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(MainActivity.this,
+                        "Storage Permission Granted",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+            else {
+                Toast.makeText(MainActivity.this,
+                        "Storage Permission Denied",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }
+        else if (requestCode == READ_PHONE_STATE) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(MainActivity.this,
+                        "Phone state Permission Granted",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+            else {
+                Toast.makeText(MainActivity.this,
+                        "Phone state Permission Denied",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, STORAGE_PERMISSION_CODE);
+        checkPermission(Manifest.permission.READ_PHONE_STATE, READ_PHONE_STATE);
 
         SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
-        ((TextView) findViewById(R.id.tbSqlite_sync_url)).setText(preferences.getString("sqlite_sync_url", "http://192.168.2.199:8080/SqliteSync1299/API3"));
+        ((TextView) findViewById(R.id.tbSqlite_sync_url)).setText(preferences.getString("sqlite_sync_url", "http://ampli1.amplifier.com.pl:8081/demo/API3"));
 
         findViewById(R.id.btReinitialize).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,6 +217,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private String getSubscriberId() {
         final TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
