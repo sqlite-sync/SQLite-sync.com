@@ -2,6 +2,7 @@
 import React from 'react';
 import { FlatList, Text, View } from 'react-native';
 import { openDatabase } from 'react-native-sqlite-storage';
+import Mybutton from './components/Mybutton';
 
 var db = openDatabase({ name: 'amplisync.db' });
  
@@ -11,6 +12,14 @@ export default class ViewAllUser extends React.Component {
     this.state = {
       FlatListItems: [],
     };
+  }
+  ListViewItemSeparator = () => {
+    return (
+      <View style={{ height: 0.2, width: '100%', backgroundColor: '#808080' }} />
+    );
+  };
+  render() {
+
     db.transaction(tx => {
       tx.executeSql('SELECT * FROM Users', [], (tx, results) => {
         var temp = [];
@@ -23,15 +32,13 @@ export default class ViewAllUser extends React.Component {
         });
       });
     });
-  }
-  ListViewItemSeparator = () => {
-    return (
-      <View style={{ height: 0.2, width: '100%', backgroundColor: '#808080' }} />
-    );
-  };
-  render() {
+
     return (
       <View>
+        <Mybutton
+          title="Add new user"
+          customClick={() => this.props.navigation.navigate('AddNewUser')}
+        /> 
         <FlatList
           data={this.state.FlatListItems}
           ItemSeparatorComponent={this.ListViewItemSeparator}

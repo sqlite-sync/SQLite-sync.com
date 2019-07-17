@@ -7,13 +7,14 @@ import {createStackNavigator,createAppContainer} from 'react-navigation';
 import HomeScreen from './pages/HomeScreen';
 import AmpliSync from './pages/AmpliSync';
 import ViewAllUser from './pages/ViewAllUser';
+import AddNewUser from './pages/AddNewUser';
  
 const App = createStackNavigator({
   HomeScreen: {
     screen: HomeScreen,
     navigationOptions: {
       title: 'HomeScreen',
-      headerStyle: { backgroundColor: '#f05555' },
+      headerStyle: { backgroundColor: '#4ecac2' },
       headerTintColor: '#ffffff',
     },
   },
@@ -21,7 +22,7 @@ const App = createStackNavigator({
     screen: AmpliSync,
     navigationOptions: {
       title: 'Synchronization',
-      headerStyle: { backgroundColor: '#f05555' },
+      headerStyle: { backgroundColor: '#4ecac2' },
       headerTintColor: '#ffffff',
     },
   },  
@@ -29,10 +30,18 @@ const App = createStackNavigator({
     screen: ViewAllUser,
     navigationOptions: {
       title: 'Users',
-      headerStyle: { backgroundColor: '#f05555' },
+      headerStyle: { backgroundColor: '#4ecac2' },
       headerTintColor: '#ffffff',
     },
-  },    
+  },
+  AddNewUser: {
+    screen: AddNewUser,
+    navigationOptions: {
+      title: 'New User',
+      headerStyle: { backgroundColor: '#4ecac2' },
+      headerTintColor: '#ffffff',
+    },
+  },      
 });
 //For React Navigation Version 2+
 //export default App;
