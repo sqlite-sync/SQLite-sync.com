@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.sqlitesync.ws</groupId>
     <artifactId>SqliteSync</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <packaging>war</packaging>
 
     <repositories>
@@ -23,18 +23,18 @@
         </repository>
     </repositories>
     <properties>
-        <jersey2.version>2.25</jersey2.version>
         <jaxrs.version>2.0.1</jaxrs.version>
-        <jackson.version>2.8.5</jackson.version>
+        <jackson.version>2.9.9</jackson.version>
+        <jersey2.version>2.25.1</jersey2.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>SQLiteSyncCore</groupId>
             <artifactId>SQLiteSyncCore</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.2</version>
             <scope>system</scope>
             <systemPath>
-                ${project.basedir}/../sqlitesync-core/out/artifacts/SQLiteSyncCore_jar/SQLiteSyncCore.jar
+                ${project.basedir}/../amplisync-core/out/artifacts/SQLiteSyncCore_jar/SQLiteSyncCore.jar
             </systemPath>
         </dependency>
         <!-- JAX-RS -->
