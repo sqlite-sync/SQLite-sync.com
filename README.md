@@ -1,6 +1,8 @@
 AMPLI-SYNC community edition 1.0.1
 ===============
 
+Documentation: https://projects.ampliapps.com/projects/ampli-sync/wiki
+
 For samples for older version 2.x see branch 'clients-for-v2.x'
 
 Mobile users now expect desktop quality data driven interactive applications.
@@ -17,24 +19,25 @@ There are many ways to build mobile applications and we all have our own favouri
  
 When building data driven occasionally connected mobile applications, the common issue we all face is Bi-Directional Data Synchronisation and when/where to start that sync. Automatic data sync when a connection becomes available can create its own issues. What is needed is a simple and controlled method for performing Bi-Directional Synchronisation.
 
-SQLite-sync service provides you with a possibility of providing your system with full functionality even when not connected to the Internet.
+AMPLI-SYNC service provides you with a possibility of providing your system with full functionality even when not connected to the Internet.
 
 The service supports many different platforms, such as:
 
-- Android
-- iOS
+- Android (JAVA)
+- iOS (Objective C)
 - Xamarin
 - .NET (C#)
 - Javascript
 - JQuery
-- Sencha Touch
 - Universal Windows Platform
+- React-Native
+- Cordova
 
 Our priority is our customer therefore do not hesitate to get in touch with us under support@ampliapps.com. We read every email and every incoming message is given the highest priority. 
 
 In a nutshell:
 
-SQLite-Sync
+AMPLI-SYNC
 Offline-first applications, with working offline SQLite storage.
 Synchronisation with Microsoft SQL or MySQL back-end servers.
 Automatic mobile schema creation if required.
