@@ -12,8 +12,8 @@ namespace SampleApp
 {
     public partial class Form1 : Form
     {
-        private string connString = "Data Source=C:\\SQLite-sync.com\\DemoT.db;";
-        private string wsUrl = "http://demo.sqlite-sync.com:8081/SqliteSync/API3";
+        private string connString = "Data Source=DemoT.db;";
+        private string wsUrl = "";
 
         public Form1()
         {
@@ -23,6 +23,7 @@ namespace SampleApp
         private void button1_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
+            wsUrl = txtServerUrl.Text;
             SQLiteSyncCOMClient sqlite = new SQLiteSyncCOMClient(connString, wsUrl);
             sqlite.ReinitializeDatabase(textBox1.Text);
             LoadData();
@@ -33,6 +34,7 @@ namespace SampleApp
         private void button2_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
+            wsUrl = txtServerUrl.Text;
             SQLiteSyncCOMClient sqlite = new SQLiteSyncCOMClient(connString, wsUrl);
             sqlite.SendAndRecieveChanges(textBox1.Text);
             LoadData();
@@ -63,9 +65,8 @@ namespace SampleApp
 
                     SQLiteHelper sh = new SQLiteHelper(cmd);
 
-                    dataGridView1.DataSource = sh.Select("Select * from actor;");
-                    dataGridView2.DataSource = sh.Select("Select * from customer;");
-                    dataGridView3.DataSource = sh.Select("Select * from film;");
+                    dataGridView1.DataSource = sh.Select("Select * from document;");
+                    dataGridView2.DataSource = sh.Select("Select * from user;");
 
                     conn.Close();
                 }
