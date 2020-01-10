@@ -272,7 +272,7 @@ namespace SQLiteSyncCOMCsharp
                                                 sh.Execute(tableData.QueryUpdate, parameters);
                                                 break;
                                             case "3"://delete
-                                                sh.Execute(tableData.QueryDelete, parameters);
+                                                sh.Execute(tableData.QueryDelete + "?", parameters);
                                                 break;
                                         }
                                     }
