@@ -15,7 +15,6 @@
 		084A31BE1E6D5E0D00982453 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 084A31BC1E6D5E0D00982453 /* LaunchScreen.storyboard */; };
 		084A31D01E6D5E5200982453 /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 084A31C81E6D5E5200982453 /* XMLDictionary.m */; };
 		084A31D71E6D5EA300982453 /* SQLiteSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 084A31D61E6D5EA300982453 /* SQLiteSync.m */; };
-		084A31EF1E6D613500982453 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 084A31D91E6D613500982453 /* Info.plist */; };
 		084A31F01E6D613500982453 /* JSONModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 084A31DC1E6D613500982453 /* JSONModel.m */; };
 		084A31F11E6D613500982453 /* JSONModelClassProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 084A31DE1E6D613500982453 /* JSONModelClassProperty.m */; };
 		084A31F21E6D613500982453 /* JSONModelError.m in Sources */ = {isa = PBXBuildFile; fileRef = 084A31E01E6D613500982453 /* JSONModelError.m */; };
@@ -257,6 +256,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -275,7 +275,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				084A31EF1E6D613500982453 /* Info.plist in Resources */,
 				084A31BE1E6D5E0D00982453 /* LaunchScreen.storyboard in Resources */,
 				084A31BB1E6D5E0D00982453 /* Assets.xcassets in Resources */,
 				084A31B91E6D5E0D00982453 /* Main.storyboard in Resources */,

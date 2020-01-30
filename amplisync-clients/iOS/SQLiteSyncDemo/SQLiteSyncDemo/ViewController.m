@@ -22,7 +22,7 @@
     [self pickerTables_setDataSource];
     
     NSString *sqlite_sync_url = [[NSUserDefaults standardUserDefaults] stringForKey:@"sqlite_sync_url"];
-    [_tb_syncUrl setText:sqlite_sync_url.length > 0 ? sqlite_sync_url : @"http://demo.sqlite-sync.com:8081/SqliteSync/API3"];
+    [_tb_syncUrl setText:sqlite_sync_url.length > 0 ? sqlite_sync_url : @"https://one-million-demo.ampliapps.com/sync/API3"];
     
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)]];
 }
@@ -89,7 +89,10 @@
 }
 
 -(NSString*)subscriberId{
-    return [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    //we sugest createing unique subscriber id, example:
+    //return [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    //For demo purpose we use static subscriber id
+    return @"u90";
 }
 
 - (void)showMessage:(NSString*)message{
