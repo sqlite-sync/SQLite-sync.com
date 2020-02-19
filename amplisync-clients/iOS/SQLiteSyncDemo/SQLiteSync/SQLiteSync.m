@@ -115,7 +115,7 @@
     
     if(sqlite3_open([_databasePath UTF8String], &db) == SQLITE_OK){
         sqlite3_exec(db, "BEGIN TRANSACTION", 0, 0, 0);
-    
+        
         for (NSString* key in keys) {
             if(![key containsString:@"00000"]){
                 if(sqlite3_prepare_v2(db, [[schema objectForKey:key] UTF8String], -1, &stmt, NULL) != SQLITE_OK
@@ -149,7 +149,7 @@
     [self sendLocalChanges:subscriberId error:error];
     
     if(*error) return;
-
+    
     [self clearChangesMarker:error];
     
     if(*error) return;
@@ -179,7 +179,9 @@
     if(*error) return;
     
     for(NSString *tableName in tables){
-        [self getRemoteChangesForTable:subscriberId tableName:tableName error:error];
+        NSArray<SQLiteSyncData*> *syncDatas = [self getRemoteChangesForTable:subscriberId tableName:tableName error:error];
+        if(*error) return;
+        [self applyRemoteChangesForTable:syncDatas error:error];
         if(*error) return;
     }
 }
@@ -231,9 +233,55 @@
 }
 
 -(void)sendLocalChanges:(NSString*)subscriberId error:(NSError **)error{
+    int limit = 1000;
+    int offset = 0;
+    
+    while (true) {
+        NSString *changes = [self getLocalChanges:subscriberId limit:limit offset:offset error:error];
+        offset += limit;
+        
+        if(*error) return;
+        
+        if(!changes) return;
+        
+        NSDictionary *inputObject = @{@"subscriber": subscriberId, @"content": changes, @"version": @"3"};
+        NSData *inputData = [NSJSONSerialization dataWithJSONObject:inputObject options:NSJSONWritingPrettyPrinted error:error];
+        
+        if(*error) return;
+        
+        NSString *requestUrlString = [NSString stringWithFormat:@"%@/Send", _serverURL];
+        NSURL *requestURL = [NSURL URLWithString:requestUrlString];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        
+        [request setURL:requestURL];
+        [request setHTTPMethod:@"POST"];
+        [request setHTTPBody:inputData];
+        [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+        [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)inputData.length] forHTTPHeaderField:@"Content-Length"];
+        
+        NSHTTPURLResponse *response;
+        
+        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:error];
+        
+        if(!*error){
+            switch (response.statusCode) {
+                case 200:
+                    break;
+                case 204:
+                    break;
+                default:
+                    *error = [NSError errorWithDomain:@"com.sqlite-sync" code:0 userInfo:[NSDictionary dictionaryWithObject:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] forKey:NSLocalizedDescriptionKey]];
+                    break;
+            }
+        }
+    }
+}
+
+-(NSString*)getLocalChanges:(NSString*)subscriberId limit:(int)limit offset:(int)offset error:(NSError **)error {
     sqlite3 *db;
     sqlite3_stmt *stmt;
     NSString *query;
+    bool noChanges = true;
     
     NSMutableString *builder = [NSMutableString string];
     
@@ -258,9 +306,10 @@
                     [builder appendFormat:@"<tab n=\"%@\">", tableName];
                     
                     [builder appendString:@"<ins>"];
-                    query = [NSString stringWithFormat:@"select * from %@ where RowId is null;", tableName];
+                    query = [NSString stringWithFormat:@"select * from %@ where RowId is null LIMIT %d OFFSET %d;", tableName, limit, offset];
                     if(sqlite3_prepare_v2(db, [query UTF8String], -1, &stmt, NULL) == SQLITE_OK){
                         while(sqlite3_step(stmt) == SQLITE_ROW) {
+                            noChanges = false;
                             [builder appendString:@"<r>"];
                             for(int i = 0; i < sqlite3_column_count(stmt); i++){
                                 NSString *columnName = [NSString stringWithUTF8String:sqlite3_column_name(stmt, i)];
@@ -278,9 +327,10 @@
                     [builder appendString:@"</ins>"];
                     
                     [builder appendString:@"<upd>"];
-                    query = [NSString stringWithFormat:@"select * from %@ where MergeUpdate > 0 and RowId is not null;", tableName];
+                    query = [NSString stringWithFormat:@"select * from %@ where MergeUpdate > 0 and RowId is not null LIMIT %d OFFSET %d;", tableName, limit, offset];
                     if(sqlite3_prepare_v2(db, [query UTF8String], -1, &stmt, NULL) == SQLITE_OK){
                         while(sqlite3_step(stmt) == SQLITE_ROW) {
+                            noChanges = false;
                             [builder appendString:@"<r>"];
                             for(int i = 0; i < sqlite3_column_count(stmt); i++){
                                 NSString *columnName = [NSString stringWithUTF8String:sqlite3_column_name(stmt, i)];
@@ -304,9 +354,10 @@
         
         if(!*error){
             [builder appendString:@"<delete>"];
-            query = @"select TableId,RowId from MergeDelete;";
+            query = [NSString stringWithFormat:@"select TableId,RowId from MergeDelete LIMIT %d OFFSET %d;", limit, offset];
             if(sqlite3_prepare_v2(db, [query UTF8String], -1, &stmt, NULL) == SQLITE_OK){
                 while(sqlite3_step(stmt) == SQLITE_ROW) {
+                    noChanges = false;
                     [builder appendFormat:@"<r><tb>%1$s</tb><id>%2$s</id></r>", sqlite3_column_text(stmt, 0), sqlite3_column_text(stmt, 1)];
                 }
             }
@@ -325,40 +376,13 @@
         *error = [NSError errorWithDomain:@"com.sqlite-sync" code:0 userInfo:[NSDictionary dictionaryWithObject:@"Failed to open database" forKey:NSLocalizedDescriptionKey]];
     }
     
+    if(*error) return nil;
+    
     [builder appendString:@"</SyncData>"];
     
-    if(*error) return;
+    if(noChanges) return nil;
     
-    NSDictionary *inputObject = @{@"subscriber": subscriberId, @"content": builder, @"version": @"3"};
-    NSData *inputData = [NSJSONSerialization dataWithJSONObject:inputObject options:NSJSONWritingPrettyPrinted error:error];
-    
-    if(*error) return;
-    
-    NSString *requestUrlString = [NSString stringWithFormat:@"%@/Send", _serverURL];
-    NSURL *requestURL = [NSURL URLWithString:requestUrlString];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    
-    [request setURL:requestURL];
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:inputData];
-    [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)inputData.length] forHTTPHeaderField:@"Content-Length"];
-    
-    NSHTTPURLResponse *response;
-    
-    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:error];
-    
-    if(!*error){
-        switch (response.statusCode) {
-            case 200:
-                break;
-            case 204:
-                break;
-            default:
-                *error = [NSError errorWithDomain:@"com.sqlite-sync" code:0 userInfo:[NSDictionary dictionaryWithObject:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] forKey:NSLocalizedDescriptionKey]];
-                break;
-        }
-    }
+    return builder;
 }
 
 -(void)clearChangesMarker:(NSError **)error{
@@ -460,7 +484,7 @@
     }
 }
 
--(void)getRemoteChangesForTable:(NSString*)subscriberId tableName:(NSString*)tableName error:(NSError **)error{
+-(NSArray<SQLiteSyncData*>*)getRemoteChangesForTable:(NSString*)subscriberId tableName:(NSString*)tableName error:(NSError **)error{
     NSString *requestUrlString = [NSString stringWithFormat:@"%@/Sync/%@/%@", _serverURL, subscriberId, tableName];
     NSURL *requestURL = [NSURL URLWithString:requestUrlString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -482,13 +506,17 @@
         }
     }
     
-    if(*error) return;
+    if(*error) return nil;
     
     NSArray<SQLiteSyncData*> *syncDatas = [SQLiteSyncData arrayOfModelsFromData:data error:error];
     
-    if(*error) return;
+    if(*error) return nil;
     
-    for(SQLiteSyncData *syncData in syncDatas){        
+    return syncDatas;
+}
+
+-(void)applyRemoteChangesForTable:(NSArray<SQLiteSyncData*>*)syncDatas error:(NSError **)error {
+    for(SQLiteSyncData *syncData in syncDatas){
         if([syncData.SyncId intValue] > 0){
             sqlite3 *db;
             sqlite3_stmt *stmt = nil;
