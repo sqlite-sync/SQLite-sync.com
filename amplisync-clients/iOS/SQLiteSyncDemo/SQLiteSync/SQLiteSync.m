@@ -179,10 +179,17 @@
     if(*error) return;
     
     for(NSString *tableName in tables){
-        NSArray<SQLiteSyncData*> *syncDatas = [self getRemoteChangesForTable:subscriberId tableName:tableName error:error];
-        if(*error) return;
-        [self applyRemoteChangesForTable:syncDatas error:error];
-        if(*error) return;
+        bool moreData = true;
+        while (moreData){
+            NSArray<SQLiteSyncData*> *syncDatas = [self getRemoteChangesForTable:subscriberId tableName:tableName error:error];
+            if(*error) return;
+            moreData = false;
+            for(SQLiteSyncData *syncData in syncDatas){
+                moreData = moreData || ([syncData.MaxPackageSize intValue] > 0 && [syncData.RowsCount intValue] > 0);
+                [self applyRemoteChangesForTable:syncData error:error];
+            }
+            if(*error) return;
+        }
     }
 }
 
@@ -495,7 +502,7 @@
     NSHTTPURLResponse *response;
     
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:error];
-    
+
     if(!*error){
         switch (response.statusCode) {
             case 200:
@@ -515,123 +522,121 @@
     return syncDatas;
 }
 
--(void)applyRemoteChangesForTable:(NSArray<SQLiteSyncData*>*)syncDatas error:(NSError **)error {
-    for(SQLiteSyncData *syncData in syncDatas){
-        if([syncData.SyncId intValue] > 0){
-            sqlite3 *db;
-            sqlite3_stmt *stmt = nil;
+-(void)applyRemoteChangesForTable:(SQLiteSyncData*)syncData error:(NSError **)error {
+    if([syncData.SyncId intValue] > 0){
+        sqlite3 *db;
+        sqlite3_stmt *stmt = nil;
+        
+        if(sqlite3_open([_databasePath UTF8String], &db) == SQLITE_OK){
+            sqlite3_exec(db, "BEGIN TRANSACTION", 0, 0, 0);
             
-            if(sqlite3_open([_databasePath UTF8String], &db) == SQLITE_OK){
-                sqlite3_exec(db, "BEGIN TRANSACTION", 0, 0, 0);
-                
-                if(!*error && [syncData.TriggerInsertDrop length] > 0){
-                    if(sqlite3_prepare_v2(db, [syncData.TriggerInsertDrop UTF8String], -1, &stmt, NULL) != SQLITE_OK
-                       || sqlite3_step(stmt) != SQLITE_DONE){
-                        *error = [NSError errorWithDomain:@"com.sqlite-sync" code:0 userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%s", sqlite3_errmsg(db)] forKey:NSLocalizedDescriptionKey]];
-                    }
+            if(!*error && [syncData.TriggerInsertDrop length] > 0){
+                if(sqlite3_prepare_v2(db, [syncData.TriggerInsertDrop UTF8String], -1, &stmt, NULL) != SQLITE_OK
+                   || sqlite3_step(stmt) != SQLITE_DONE){
+                    *error = [NSError errorWithDomain:@"com.sqlite-sync" code:0 userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%s", sqlite3_errmsg(db)] forKey:NSLocalizedDescriptionKey]];
                 }
-                if(!*error && [syncData.TriggerUpdateDrop length] > 0){
-                    if(sqlite3_prepare_v2(db, [syncData.TriggerUpdateDrop UTF8String], -1, &stmt, NULL) != SQLITE_OK
-                       || sqlite3_step(stmt) != SQLITE_DONE){
-                        *error = [NSError errorWithDomain:@"com.sqlite-sync" code:0 userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%s", sqlite3_errmsg(db)] forKey:NSLocalizedDescriptionKey]];
-                    }
+            }
+            if(!*error && [syncData.TriggerUpdateDrop length] > 0){
+                if(sqlite3_prepare_v2(db, [syncData.TriggerUpdateDrop UTF8String], -1, &stmt, NULL) != SQLITE_OK
+                   || sqlite3_step(stmt) != SQLITE_DONE){
+                    *error = [NSError errorWithDomain:@"com.sqlite-sync" code:0 userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%s", sqlite3_errmsg(db)] forKey:NSLocalizedDescriptionKey]];
                 }
-                if(!*error && [syncData.TriggerDeleteDrop length] > 0){
-                    if(sqlite3_prepare_v2(db, [syncData.TriggerDeleteDrop UTF8String], -1, &stmt, NULL) != SQLITE_OK
-                       || sqlite3_step(stmt) != SQLITE_DONE){
-                        *error = [NSError errorWithDomain:@"com.sqlite-sync" code:0 userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%s", sqlite3_errmsg(db)] forKey:NSLocalizedDescriptionKey]];
-                    }
-                    sqlite3_reset(stmt);
+            }
+            if(!*error && [syncData.TriggerDeleteDrop length] > 0){
+                if(sqlite3_prepare_v2(db, [syncData.TriggerDeleteDrop UTF8String], -1, &stmt, NULL) != SQLITE_OK
+                   || sqlite3_step(stmt) != SQLITE_DONE){
+                    *error = [NSError errorWithDomain:@"com.sqlite-sync" code:0 userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%s", sqlite3_errmsg(db)] forKey:NSLocalizedDescriptionKey]];
                 }
-                
-                NSArray<SQLiteSyncDataRecord*> *records;
-                
-                if(!*error){
-                    records = [syncData SQLiteSyncDataRecordsWithError:error];
-                }
-                
-                if(!*error){
-                    for(SQLiteSyncDataRecord *record in records){
-                        if([record.action intValue] == 1 || [record.action intValue] == 2 || [record.action intValue] == 3){
-                            NSString *query;
-                            
-                            switch ([record.action intValue]) {
-                                case 1:
-                                    query = syncData.QueryInsert;
-                                    break;
-                                case 2:
-                                    query = syncData.QueryUpdate;
-                                    break;
-                                case 3:
-                                    query = [syncData.QueryDelete stringByAppendingString:@"?"];
-                                    break;
+                sqlite3_reset(stmt);
+            }
+            
+            NSArray<SQLiteSyncDataRecord*> *records;
+            
+            if(!*error){
+                records = [syncData SQLiteSyncDataRecordsWithError:error];
+            }
+            
+            if(!*error){
+                for(SQLiteSyncDataRecord *record in records){
+                    if([record.action intValue] == 1 || [record.action intValue] == 2 || [record.action intValue] == 3){
+                        NSString *query;
+                        
+                        switch ([record.action intValue]) {
+                            case 1:
+                                query = syncData.QueryInsert;
+                                break;
+                            case 2:
+                                query = syncData.QueryUpdate;
+                                break;
+                            case 3:
+                                query = [syncData.QueryDelete stringByAppendingString:@"?"];
+                                break;
+                        }
+                        
+                        if(sqlite3_prepare_v2(db, [query UTF8String], -1, &stmt, NULL) == SQLITE_OK){
+                            for(int i = 0; i < [record.columns count]; i++){
+                                sqlite3_bind_text(stmt, i + 1, [[record.columns objectAtIndex:i] UTF8String], -1, SQLITE_TRANSIENT);
                             }
                             
-                            if(sqlite3_prepare_v2(db, [query UTF8String], -1, &stmt, NULL) == SQLITE_OK){
-                                for(int i = 0; i < [record.columns count]; i++){
-                                    sqlite3_bind_text(stmt, i + 1, [[record.columns objectAtIndex:i] UTF8String], -1, SQLITE_TRANSIENT);
-                                }
-                                
-                                if(sqlite3_step(stmt) != SQLITE_DONE){
-                                    *error = [NSError errorWithDomain:@"com.sqlite-sync" code:0 userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%s", sqlite3_errmsg(db)] forKey:NSLocalizedDescriptionKey]];
-                                }
-                                
-                                sqlite3_reset(stmt);
-                            }
-                            else{
+                            if(sqlite3_step(stmt) != SQLITE_DONE){
                                 *error = [NSError errorWithDomain:@"com.sqlite-sync" code:0 userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%s", sqlite3_errmsg(db)] forKey:NSLocalizedDescriptionKey]];
                             }
                             
-                            if(*error) break;
+                            sqlite3_reset(stmt);
                         }
+                        else{
+                            *error = [NSError errorWithDomain:@"com.sqlite-sync" code:0 userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%s", sqlite3_errmsg(db)] forKey:NSLocalizedDescriptionKey]];
+                        }
+                        
+                        if(*error) break;
                     }
                 }
-                
-                if(!*error && [syncData.TriggerInsert length] > 0){
-                    if(sqlite3_prepare_v2(db, [syncData.TriggerInsert UTF8String], -1, &stmt, NULL) != SQLITE_OK
-                       || sqlite3_step(stmt) != SQLITE_DONE){
-                        *error = [NSError errorWithDomain:@"com.sqlite-sync" code:0 userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%s", sqlite3_errmsg(db)] forKey:NSLocalizedDescriptionKey]];
-                    }
-                    sqlite3_reset(stmt);
+            }
+            
+            if(!*error && [syncData.TriggerInsert length] > 0){
+                if(sqlite3_prepare_v2(db, [syncData.TriggerInsert UTF8String], -1, &stmt, NULL) != SQLITE_OK
+                   || sqlite3_step(stmt) != SQLITE_DONE){
+                    *error = [NSError errorWithDomain:@"com.sqlite-sync" code:0 userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%s", sqlite3_errmsg(db)] forKey:NSLocalizedDescriptionKey]];
                 }
-                if(!*error && [syncData.TriggerUpdate length] > 0){
-                    if(sqlite3_prepare_v2(db, [syncData.TriggerUpdate UTF8String], -1, &stmt, NULL) != SQLITE_OK
-                       || sqlite3_step(stmt) != SQLITE_DONE){
-                        *error = [NSError errorWithDomain:@"com.sqlite-sync" code:0 userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%s", sqlite3_errmsg(db)] forKey:NSLocalizedDescriptionKey]];
-                    }
-                    sqlite3_reset(stmt);
+                sqlite3_reset(stmt);
+            }
+            if(!*error && [syncData.TriggerUpdate length] > 0){
+                if(sqlite3_prepare_v2(db, [syncData.TriggerUpdate UTF8String], -1, &stmt, NULL) != SQLITE_OK
+                   || sqlite3_step(stmt) != SQLITE_DONE){
+                    *error = [NSError errorWithDomain:@"com.sqlite-sync" code:0 userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%s", sqlite3_errmsg(db)] forKey:NSLocalizedDescriptionKey]];
                 }
-                if(!*error && [syncData.TriggerDelete length] > 0){
-                    if(sqlite3_prepare_v2(db, [syncData.TriggerDelete UTF8String], -1, &stmt, NULL) != SQLITE_OK
-                       || sqlite3_step(stmt) != SQLITE_DONE){
-                        *error = [NSError errorWithDomain:@"com.sqlite-sync" code:0 userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%s", sqlite3_errmsg(db)] forKey:NSLocalizedDescriptionKey]];
-                    }
-                    sqlite3_reset(stmt);
+                sqlite3_reset(stmt);
+            }
+            if(!*error && [syncData.TriggerDelete length] > 0){
+                if(sqlite3_prepare_v2(db, [syncData.TriggerDelete UTF8String], -1, &stmt, NULL) != SQLITE_OK
+                   || sqlite3_step(stmt) != SQLITE_DONE){
+                    *error = [NSError errorWithDomain:@"com.sqlite-sync" code:0 userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%s", sqlite3_errmsg(db)] forKey:NSLocalizedDescriptionKey]];
                 }
-                
-                if(*error){
-                    sqlite3_exec(db, "ROLLBACK TRANSACTION", 0, 0, 0);
-                }
-                else{
-                    sqlite3_exec(db, "COMMIT", 0, 0, 0);
-                }
-                
-                if(stmt){
-                    sqlite3_finalize(stmt);
-                }
-                
-                sqlite3_close(db);
+                sqlite3_reset(stmt);
+            }
+            
+            if(*error){
+                sqlite3_exec(db, "ROLLBACK TRANSACTION", 0, 0, 0);
             }
             else{
-                *error = [NSError errorWithDomain:@"com.sqlite-sync" code:0 userInfo:[NSDictionary dictionaryWithObject:@"Failed to open database" forKey:NSLocalizedDescriptionKey]];
+                sqlite3_exec(db, "COMMIT", 0, 0, 0);
             }
             
-            if(*error) return;
+            if(stmt){
+                sqlite3_finalize(stmt);
+            }
             
-            [self commitSynchronization:syncData.SyncId error:error];
-            
-            if(*error) return;
+            sqlite3_close(db);
         }
+        else{
+            *error = [NSError errorWithDomain:@"com.sqlite-sync" code:0 userInfo:[NSDictionary dictionaryWithObject:@"Failed to open database" forKey:NSLocalizedDescriptionKey]];
+        }
+        
+        if(*error) return;
+        
+        [self commitSynchronization:syncData.SyncId error:error];
+        
+        if(*error) return;
     }
 }
 

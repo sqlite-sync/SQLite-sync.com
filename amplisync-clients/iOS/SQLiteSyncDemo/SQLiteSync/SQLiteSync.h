@@ -115,5 +115,8 @@
 @property (nonatomic, strong) NSNumber * _Nullable SyncId;
 @property (nonatomic, strong) NSString * _Nullable SQLiteSyncVersion;
 
+@property (nonatomic, strong) NSNumber * _Nullable MaxPackageSize;
+@property (nonatomic, strong) NSNumber * _Nullable RowsCount;
+
 -(NSArray<SQLiteSyncDataRecord*> * _Nonnull)SQLiteSyncDataRecordsWithError:(NSError * _Nullable * _Nullable)error;
 @end
