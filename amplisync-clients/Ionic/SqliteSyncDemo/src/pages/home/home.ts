@@ -12,7 +12,7 @@ import { Platform } from 'ionic-angular';
 })
 export class HomePage {
 
-  public syncUrl = "http://localhost:8080/SqliteSync_315/API3";
+  public syncUrl = "https://one-million-demo.ampliapps.com/sync/API3";
   public subscriberId = 1;
   public loadingText = "";
   public isLoading = false;
