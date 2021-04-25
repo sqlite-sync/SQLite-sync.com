@@ -67,14 +67,22 @@ public class Database {
             cpds.setPassword(SQLiteSyncConfig.DBPASS);
 
             // the settings below are optional -- c3p0 can work with defaults
-            cpds.setMinPoolSize(3);
+            cpds.setMaxPoolSize(50);
             cpds.setAcquireIncrement(3);
-            cpds.setMaxPoolSize(10);
-            cpds.setIdleConnectionTestPeriod(300);
-            cpds.setMaxIdleTime(240);
-            cpds.setTestConnectionOnCheckin(false);
-            cpds.setMaxStatements(2000);
-            cpds.setMaxStatementsPerConnection(100);
+            cpds.setInitialPoolSize(10);
+            cpds.setMinPoolSize(10);
+            cpds.setAcquireRetryAttempts(0);
+            cpds.setAcquireRetryDelay(3000);
+            cpds.setBreakAfterAcquireFailure(false);
+            cpds.setMaxConnectionAge(60);
+            cpds.setMaxIdleTime(30);
+            cpds.setMaxIdleTimeExcessConnections(10);
+            cpds.setIdleConnectionTestPeriod(30); //changed from 15->30
+            cpds.setTestConnectionOnCheckout(false);
+            cpds.setDebugUnreturnedConnectionStackTraces(true);
+            cpds.setAutoCommitOnClose(true);
+            cpds.setMaxStatements(0);
+            cpds.setMaxStatementsPerConnection(20);
 
         } catch (PropertyVetoException e){
             Logs.write(Logs.Level.ERROR, "Database constructor: " + e.getMessage());
