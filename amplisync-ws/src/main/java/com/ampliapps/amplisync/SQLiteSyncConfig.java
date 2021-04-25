@@ -7,6 +7,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Map;
 import java.util.Properties;
 
 /*************************************************************************
@@ -42,7 +43,7 @@ public class SQLiteSyncConfig {
     public static String WORKING_DIR = "../working dir/";
     public static Integer LOG_LEVEL = 5;
     public static String TIMESTAMP_FORMAT = "yyyy-MM-dd HH:mm:ssZZ";
-
+    private static String DB_URL_FORMAT = "jdbc:mysql://%s:%d/%s?rewriteBatchedStatements=true";
     public static void Load() {
 
         if(SQLiteSyncConfig.IsConfigLoaded)
@@ -74,6 +75,30 @@ public class SQLiteSyncConfig {
             TIMESTAMP_FORMAT = properties.getProperty("TIMESTAMP_FORMAT");
             HISTORY_DAYS = Integer.parseInt(properties.getProperty("HISTORY_DAYS"));
             LOG_LEVEL = Integer.parseInt(properties.getProperty("LOG_LEVEL"));
+
+            Logs.write(Logs.Level.INFO, "Reading configuration from environment");
+            Map<String, String> env = System.getenv();
+
+            if(env.get("WORKING_DIR") != null)
+                WORKING_DIR = env.get("WORKING_DIR");
+            if(env.get("DBUSER") != null)
+                DBUSER = env.get("DBUSER");
+            if(env.get("DBPASS") != null)
+                DBPASS = env.get("DBPASS");
+            String dbHost = env.get("DBHOST");
+            int dbPort = Integer.parseInt(env.get("DBPORT"));
+            String dbName = env.get("DBNAME");
+            DBURL = String.format(DB_URL_FORMAT, dbHost, dbPort, dbName);
+            if(env.get("DBURL") != null)
+                DBURL = env.get("DBURL");
+            if(env.get("DATE_FORMAT") != null)
+                DATE_FORMAT = env.get("DATE_FORMAT");
+            if(env.get("TIMESTAMP_FORMAT") != null)
+                TIMESTAMP_FORMAT = env.get("TIMESTAMP_FORMAT");
+            if(env.get("HISTORY_DAYS") != null)
+                HISTORY_DAYS = Integer.parseInt(env.get("HISTORY_DAYS"));
+            if(env.get("LOG_LEVEL") != null)
+                LOG_LEVEL = Integer.parseInt(env.get("LOG_LEVEL"));
 
             SQLiteSyncConfig.IsConfigLoaded = true;
 
