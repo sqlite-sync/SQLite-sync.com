@@ -16,6 +16,12 @@
             <layout>default</layout>
         </repository>
         <repository>
+            <id>maven2-clojars</id>
+            <name>Clojars Repository</name>
+            <url>http://clojars.org/repo/</url>
+            <layout>default</layout>
+        </repository>
+        <repository>
             <id>atlassian</id>
             <name>atlassian Repository</name>
             <url>https://maven.atlassian.com/3rdparty/</url>
@@ -28,15 +34,6 @@
         <jersey2.version>2.25.1</jersey2.version>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>SQLiteSyncCore</groupId>
-            <artifactId>SQLiteSyncCore</artifactId>
-            <version>1.0.2</version>
-            <scope>system</scope>
-            <systemPath>
-                ${project.basedir}/../amplisync-core/out/artifacts/SQLiteSyncCore_jar/SQLiteSyncCore.jar
-            </systemPath>
-        </dependency>
         <!-- JAX-RS -->
         <dependency>
             <groupId>javax.ws.rs</groupId>
@@ -127,11 +124,62 @@
         <dependency>
             <groupId>com.mchange</groupId>
             <artifactId>c3p0</artifactId>
-            <version>0.9.5.2</version>
+            <version>0.9.5.4</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-web</artifactId>
+            <version>2.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.0.0-M4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.0.0-M4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>1.0.0-M4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-runner</artifactId>
+            <version>1.0.0-M4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.16</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.6.1</version>
+            <type>maven-plugin</type>
+        </dependency>
+
     </dependencies>
     <build>
-        <finalName>SqliteSync</finalName>
+        <finalName>ampli-sync-${project.version}</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -139,6 +187,13 @@
                     <configuration>
                         <source>1.8</source>
                         <target>1.8</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <configuration>
+                        <webXml>web\WEB-INF\web.xml</webXml>
                     </configuration>
                 </plugin>
             </plugins>

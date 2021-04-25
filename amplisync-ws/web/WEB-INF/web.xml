@@ -11,7 +11,7 @@
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>com.sqlitesync.ws</param-value>
+            <param-value>com.ampliapps.amplisync</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -23,8 +23,7 @@
     <env-entry>
         <env-entry-name>working-dir</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <!--IMPROTANT! Set path for working dir with / on the end-->
-        <env-entry-value>/Users/tomek/Work/Sources/SQLite-sync.com/Wersja Community/</env-entry-value>
+        <env-entry-value>/working-dir/</env-entry-value>
     </env-entry>
 
 </web-app>
