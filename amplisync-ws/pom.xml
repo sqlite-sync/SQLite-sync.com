@@ -30,7 +30,7 @@
     </repositories>
     <properties>
         <jaxrs.version>2.0.1</jaxrs.version>
-        <jackson.version>2.12.3</jackson.version>
+        <jackson.version>2.12.6.1</jackson.version>
         <jersey2.version>2.25.1</jersey2.version>
     </properties>
     <dependencies>
