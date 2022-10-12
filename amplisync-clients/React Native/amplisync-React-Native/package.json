@@ -9,9 +9,9 @@
   "dependencies": {
     "react": "16.6.3",
     "react-cli": "^0.3.1",
-    "react-native": "0.58.4",
+    "react-native": "0.70.2",
     "react-native-gesture-handler": "^1.0.15",
-    "react-native-sqlite-storage": "^3.3.9",
+    "react-native-sqlite-storage": "^3.3.11",
     "react-navigation": "^3.2.1"
   },
   "devDependencies": {
